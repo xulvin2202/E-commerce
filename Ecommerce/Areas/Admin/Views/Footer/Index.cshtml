@@ -1,0 +1,71 @@
+﻿@model List<Model.EF.Footer>
+@{
+    ViewBag.Title = "QL bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{ Footer}
+@section jsFooter{
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            @*<ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#Users">Danh sách</a></li>
+                    <li class="nav-item">@Html.ActionLink("Tạo mới", "Create", null, new { @class = "nav-link" })</li>
+                </ul>*@
+            <div class="responsive-table-plugin">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th data-priority="0">ID</th>
+                                    <th data-priority="1">Text</th>
+                                    <th data-priority="2">Link</th>
+                                    <th data-priority="3">DisplayOrder</th>
+                                    <th data-priority="4">ParentID</th>
+                                    <th data-priority="5">#</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.ID
+                                        </td>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @{
+
+                                                string x = item.Link;
+
+                                                if (x != null && x.Length > 60)
+                                                {
+                                                    x = x.Substring(0, 60);
+                                                }
+                                            }
+                                            @Html.Raw(x)<text>...</text>
+                                        </td>
+                                        <td>@item.DisplayOrder</td>
+                                        <td>@item.ParentID</td>
+                                        <td>
+                                            <a href="~/Admin/Footer/Edit/@item.ID" class="btn btn-purple waves-effect waves-light" style="width:45px" title="Sửa"><i class="icon-pencil"></i></a>
+                                          
+                                            <script>$("#myActionLinkId").prepend("<i class='fa fa-trash-o text-danger'></i> ");</script>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

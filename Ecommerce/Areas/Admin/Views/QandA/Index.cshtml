@@ -1,0 +1,260 @@
+﻿@model PagedList.IPagedList<Model.EF.QandA>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{Câu hỏi}
+@section jsFooter{}
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#Users">Danh sách</a></li>
+                <li class="nav-item">@Html.ActionLink("Tạo mới", "Create", null, new { @class = "nav-link" })</li>
+            </ul>
+            <div class="tab-content mt-0">
+                <div class="tab-pane active show" id="Users">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-custom spacing8">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="w60">Câu hỏi</th>
+                                    <th>Câu trả lời</th>
+                                    <th>Ngày Đăng</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+
+                                        <td>
+                                            @{
+
+                                                string q = item.Question;
+
+                                                if (q != null && q.Length > 25)
+                                                {
+                                                    q = q.Substring(0, 25);
+                                                }
+                                            }
+                                            @Html.Raw(q)<text>...</text>
+
+                                        </td>
+                                        <td>
+                                            @{
+
+                                                string a = item.Answer;
+
+                                                if (a != null && a.Length > 17)
+                                                {
+                                                    a = a.Substring(0, 17);
+                                                }
+                                            }
+                                            @Html.Raw(a)<text>...</text>
+
+                                        </td>
+                                        <td>
+                                            @item.CreateDate
+                                        <td>
+                                        <td>@item.Status</td>
+                                        <td>
+                                            <a href="~/Admin/QandA/Edit/@item.ID" class="btn btn-purple waves-effect waves-light" title="Sửa"><i class="icon-pencil"></i></a>
+                                            <a href="~/Admin/QandA/Detail/@item.ID" class="btn btn-purple waves-effect waves-light" title="Chi tiết"><i class="far fa-sticky-note"></i></a>
+                                            @Ajax.ActionLink("Xóa", "Delete",null, new { @id = item.ID }, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn chắc chắn muốn xóa ?",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                           HttpMethod = "Delete",
+                                       }, new {
+                                           @class = "btn btn-purple waves-effect waves-light",
+                                           @id = "myActionLinkId"
+                                       })
+                                            <script>$("#myActionLinkId").prepend("<i class='fa fa-trash-o text-danger'></i> ");</script>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul class="pagination-list">
+
+                                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="addUser">
+                    <div class="body mt-2">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="First Name *">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Email ID *">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile No">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Employee ID *">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username *">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <select class="form-control show-tick">
+                                        <option>Select Role Type</option>
+                                        <option>Super Admin</option>
+                                        <option>Admin</option>
+                                        <option>Employee</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <h6>Module Permission</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Read</th>
+                                                <th>Write</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Super Admin</td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Admin</td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Employee</td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>HR Admin</td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox" checked="">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label class="fancy-checkbox">
+                                                        <input class="checkbox-tick" type="checkbox" name="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" class="btn btn-primary">Add</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

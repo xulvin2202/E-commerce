@@ -1,0 +1,104 @@
+﻿@model PagedList.IPagedList<Model.EF.Content>
+@using PagedList.Mvc;
+@{
+    /**/
+
+    ViewBag.Title = "QL bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{ Danh sách bài viết }
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').var(url);
+            };
+            finder.popup();
+        })
+    </script>
+}
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card-box">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#Users">Danh sách</a></li>
+                <li class="nav-item">@Html.ActionLink("Tạo mới", "Create", null, new { @class = "nav-link" })</li>
+            </ul>
+            <div class="responsive-table-plugin">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-priority="1">Tên</th>
+                                    <th data-priority="3">Mô tả</th>
+                                    <th data-priority="1">Ngày Đăng</th>
+                                    <th data-priority="3">#</th>
+                                    <th data-priority="3"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@item.Image" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" style="width:70px;height:50px" class="w35 h35 rounded" data-original-title="Avatar Name">
+                                        </td>
+                                        <td>
+
+                                            <h4 class="mb-0">@item.Name</h4>
+                                            <label class="mb-0" autocomplete="off">@item.MetaTitle</label>
+                                        </td>
+                                        <td>
+                                            @{
+
+                                                string x = item.Description;
+
+                                                if (x != null && x.Length > 60)
+                                                {
+                                                    x = x.Substring(0, 60);
+                                                }
+                                            }
+                                            @Html.Raw(x)<text>...</text>
+                                        </td>
+                                        <td autocomplete="off">@item.CreateDate</td>
+                                        <td>
+                                            <a href="~/Admin/Content/Edit/@item.ID" class="btn btn-purple waves-effect waves-light" style="width:45px" title="Sửa"><i class="icon-pencil"></i></a>
+                                            <a href="~/Admin/Content/Detail/@item.ID" class="btn btn-purple waves-effect waves-light" style="width:45px" title="Chi tiết"><i class="far fa-sticky-note"></i></a>
+                                            @Ajax.ActionLink("Xóa", "Delete",null, new { @id = item.ID }, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn chắc chắn muốn xóa ?",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                           HttpMethod = "Delete",
+                                       }, new {
+                                           @class = "btn btn-purple waves-effect waves-light",
+                                           @id = "myActionLinkId"
+                                       })
+                                            <script>$("#myActionLinkId").prepend("<i class='fa fa-trash-o text-danger'></i> ");</script>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul class="pagination-list">
+
+                                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

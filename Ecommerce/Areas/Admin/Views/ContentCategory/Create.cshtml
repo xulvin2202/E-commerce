@@ -1,0 +1,42 @@
+﻿@model Model.EF.ContentCategory
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{ Thêm mới danh mục tin tức}
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card-box">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="simpleinput">Tên</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" autocomplete="off" autofocus id="Name" name="Name" placeholder="Nhập tên mới...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Thêm mới" class="btn btn-purple waves-effect waves-light" />
+                    </div>
+                </div>
+            </div>
+            }
+
+            <div>
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,210 @@
+﻿@model List<Ecommerce.Models.CartItem>
+@using Ecommerce.Models
+@{ 
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg ">
+        <div class="entry-header" style="background-image: url(../../Image/8.png);">
+            <h3 class="entry-title">
+                Thanh Toán
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" ref="nofollow" class="breadcrumb-label">
+                     Trang chủ
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/thanh-toan" class="breadcrumb-label">
+                     Thanh Toán
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+    <div class="page container">
+        @if (Model.Count > 0)
+        {
+            <main class="page-content" data-cart>
+
+                <h1 class="page-heading" data-cart-page-title>
+                    Giỏ hàng (@Model.Count() sản phẩm)
+                </h1>
+
+                <div data-cart-status>
+                </div>
+
+                <div class="loadingOverlay"></div>
+
+                <div data-cart-content>
+                    <table class="cart" data-cart-quantity="10">
+
+                        <thead class="cart-header">
+                            <tr>
+                                <th class="cart-header-item" colspan="2">Sản Phẩm</th>
+                                <th class="cart-header-item">Giá</th>
+                                <th class="cart-header-item cart-header-quantity">Số lượng</th>
+                                <th class="cart-header-item">Tổng</th>
+                            </tr>
+                        </thead>
+                        <tbody class="cart-list">
+                            @foreach (var item in Model)
+                            {
+                                var url = "/chi-tiet/" + @item.Product.MetaTitle + "-" + @item.Product.ID;
+                                <tr class="cart-item" data-item-row>
+                                    <td class="cart-item-block cart-item-figure">
+                                        <img class="cart-item-image lazyload" data-sizes="auto" width="100" src="@item.Product.Image" alt="Tiered Wire Basket Detergent" title="Tiered Wire Basket Detergent">
+                                    </td>
+                                    <td class="cart-item-block cart-item-title">
+                                        <p class="cart-item-brand">OFS</p>
+                                        <h4 class="cart-item-name"><a href="@url">@item.Product.Name</a></h4>
+
+
+
+
+
+                                    </td>
+                                    <td class="cart-item-block cart-item-info">
+                                        <span class="cart-item-label">Price</span>
+                                        @if (item.Product.PromotionPrice != null)
+                                        {
+                                            <span class="cart-item-value ">@String.Format("{0:#,0 }", @item.Product.PromotionPrice)</span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="cart-item-value ">@String.Format("{0:#,0 }", @item.Product.Price)</span>
+                                        }
+                                    </td>
+
+                                    <td class="cart-item-block cart-item-info cart-item-quantity">
+
+                                        <label class="form-label cart-item-label" for="qty-91fd16c7-033d-4975-a045-fd19ee352e20">Quantity:</label>
+                                        <div class="form-increment">
+
+                                            <label  class="txtQuantity"
+                                                   
+                                                   min="1"
+                                                   >@item.Quantity</label>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td class="cart-item-block cart-item-info">
+                                        <span class="cart-item-label">Total</span>
+
+                                        @if (item.Product.PromotionPrice != null)
+                                        {
+                                            <strong class="cart-item-value "> @((item.Product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0")) </strong>
+                                        }
+                                        else
+                                        {
+                                            <strong class="cart-item-value "> @((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) </strong>
+                                           
+                                           
+                                        }
+                                        
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    
+
+                </div>
+
+                <div data-cart-totals>
+                    <ul class="cart-totals">
+                        
+                        <li class="cart-total">
+                            <div class="cart-total-label">
+                                <strong>Grand total:</strong>
+                            </div>
+                            <div class="cart-total-value cart-total-grandTotal">
+                                <span>@ViewBag.TotalPrice</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+               
+
+
+                <!-- snippet location cart -->
+            </main>
+        }
+        else
+        {
+            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng !</span>
+        }
+    </div>
+ 
+        <div class="container">
+            <header class="mb-5">
+                <h2 class="heading-line">Thông tin</h2>
+            </header>
+            <div class="row">
+                <div class="col-md-7">
+                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                    {
+
+                        <form class="custom-form form">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name" class="form-label">Họ và Tên</label>
+                                            <input type="text" name="shipName" id="shipName" placeholder="Nhập Tên" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="surname" class="form-label">Số Điện Thoại</label>
+                                            <input type="text" name="mobile" id="mobile" placeholder="Nhập SĐT" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" name="email" id="email" placeholder="Nhập Email" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Địa Chỉ Nhận Hàng</label>
+                                    <textarea rows="4" name="address" id="address" placeholder="Nhập địa chỉ" required="required" class="form-control"></textarea>
+                                </div>
+                                <button type="submit" class="button button--primary">Gửi Đơn Hàng</button>
+                            </div>
+                        </form>
+
+
+                    }
+                </div>
+
+            </div>
+        </div>
+
+
+</div>

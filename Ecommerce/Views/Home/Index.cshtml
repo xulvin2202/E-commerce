@@ -1,0 +1,1877 @@
+﻿@model List<Model.EF.Slide>
+
+@{
+    /**/
+    <title>Trang chủ</title>
+    /**/
+
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ListNewProduct = (List<Model.EF.Product>)ViewBag.NewProduct;
+    var ListFeatureProduct = (List<Model.EF.Product>)ViewBag.FeatureProduct;
+    var ListSaleProduct = (List<Model.EF.Product>)ViewBag.SaleProduct;
+    var ListBrand = (List<Model.EF.Brand>)ViewBag.Brand;
+    //var ListContent = (List<Model.EF.Content>)ViewBag.Content;
+ 
+}
+
+@section Slide{
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-9 col-lg-9 col-12 offset-lg-3">
+                <div class="section-slideshow ">
+
+                    <div class="heroCarousel "
+                         data-slick='{
+        "dots": true,
+        "arrows": false,
+        "mobileFirst": false,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "autoplaySpeed": 5000
+    }'>
+                        @foreach (var item in Model)
+                        {
+                            <div class="heroCarousel-slide "
+                                 style="background-image: url(../Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/product_images/theme_images/it.png)">
+                                <a href="@item.Link">
+                                    <img src="@item.Image" alt="" title="" />
+                                </a>
+                            </div>
+                        }
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="module sb-banner sb-banner--custom_banners_1 ">
+                    <div class="row">
+                        <div class="col-sm-12 col-12">
+
+
+                            <div class="block-content clearfix d-flex flex-row">
+
+
+
+                                <div class="banners info-1">
+                                    <div class="banner-figure">
+
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner1.png" alt=" " />
+                                        </a>
+                                    </div>
+
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="banners info-2">
+                                    <div class="banner-figure">
+
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner2.png" alt=" " />
+                                        </a>
+                                    </div>
+
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+<div class="main-body clearfix sidebar--left">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-sm-12 col-12 sidebar main-left">
+
+
+                <div class="module extraslider--banner_none extraslider--seller">
+                    <h5 class="block-title">
+                        Top Sale
+                    </h5>
+                    <div class="block-content">
+                        <div class="row">
+
+
+
+                            <div class="sb-extraslider-container col-12">
+
+                                <section class="products-list productCarousel "
+                                         data-slick='{
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+		"arrows": true,
+        "responsive": [
+            {
+                "breakpoint": 1199,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 1
+                }
+            },
+            {
+                "breakpoint": 991,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 1
+                }
+            },
+            {
+                "breakpoint": 767,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 2
+
+                }
+            },
+            {
+                "breakpoint": 567,
+                "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 2
+                }
+            },
+            {
+                "breakpoint": 320,
+                "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 1
+                }
+            },
+            {
+                "breakpoint": 0,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 1
+                }
+            }
+        ]
+    }'>
+
+                                    <div class="first-side productCarousel-slide product-layout product-list">
+                                        @foreach (var item in ListSaleProduct)
+                                        {
+                                            var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                            <article class="product-item-container product-row ">
+                                                <div class="item">
+                                                    <div class="left-block">
+
+                                                        @if (item.PromotionPrice != null)
+                                                        {<div class="sale-flag-discount" style="resize:20%">
+                                                                <span class="sale-text">Sale</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            @*<div class="sale-flag-discount">
+                                                                    <span class="sale-text">Sale</span>
+                                                                </div>*@
+                                                        }
+
+                                                        <a href="@url" class="product-item-photo">
+                                                            <img class="card-image lazyload" data-sizes="auto" src="@item.Image" alt="" width="85" height="85">
+                                                        </a>
+                                                    </div>
+                                                    <div class="right-block">
+                                                        <h4 class="card-title">
+                                                            <a href="@url">@item.Name</a>
+                                                        </h4>
+
+                                                        <div class="ratings ">
+                                                            <div class="prod-rating" data-test-info-type="productRating">
+                                                                <span class="rating--small">
+                                                                    <span class="icon icon--ratingEmpty">
+                                                                        <svg>
+                                                                            <use xlink:href="#icon-star" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="icon icon--ratingEmpty">
+                                                                        <svg>
+                                                                            <use xlink:href="#icon-star" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="icon icon--ratingEmpty">
+                                                                        <svg>
+                                                                            <use xlink:href="#icon-star" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="icon icon--ratingEmpty">
+                                                                        <svg>
+                                                                            <use xlink:href="#icon-star" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="icon icon--ratingEmpty">
+                                                                        <svg>
+                                                                            <use xlink:href="#icon-star" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <!-- snippet location product_rating -->
+
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="price-section price-section--withoutTax ">
+                                                            @if (item.PromotionPrice != null)
+                                                            {
+                                                                <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", @item.PromotionPrice)  </span>
+                                                                <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", item.Price)</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", item.Price)</span>
+                                                            }
+
+
+                                                        </div>
+
+                                                        <div class="button-group">
+                                                            <div class="action-item addToCart">
+                                                                <a href="/them-gio-hang?productId=@item.ID&quantity=1" @*data-addtocart data-product-id="103"*@ @*data-wait-message="Add to Cart" class="action-link  button--cart"*@ title="Thêm vào giỏ hàng"><i class="fas fa-shopping-basket"></i></a>
+                                                            </div>
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        }
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div> <div class="module sb-banner sb-banner--custom_banners_sidebar ">
+                    <div class="row">
+                        <div class="col-sm-12 col-12">
+                            <div class="block-content clearfix d-flex flex-row">
+                                <div class="banners info-">
+                                    <div class="banner-figure">
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner_sidebar.png" alt=" " />
+                                        </a>
+                                    </div>
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="module sb-faq">
+                    <h5 class="block-title"> Góc thắc mắc !</h5>
+                    <div class="block-content clearfix">
+                        <ul class="blank  yt-accordion sb-accordion">
+                            @foreach (var item in ListQA)
+                            {
+                                <li class="yt-accordion-group">
+                                    <div class="accordion-heading"><i class="fa fa-plus"></i> @Html.Raw(item.Question)</div>
+                                    <div class="yt-accordion-inner">
+                                        @Html.Raw(item.Answer)
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>*@
+                @*<div class="module sb-testimonial ">
+                        <div class="block-content clearfix">
+                            <h5 class="footer-info-heading">
+                                TESTIMONIAL
+                                <span class="expander"><i class="fa fa-chevron-circle-down"></i></span>
+                            </h5>
+                            <div class="sb-testimonial--carousel "
+                                 data-slick='{
+                        "dots": false,
+                        infinite: true,
+                        "arrows": false,
+                        "infinite": false,
+                        "mobileFirst": true,
+                        "slidesToShow": 1,
+                        "slidesToScroll": 1,
+                        "autoplay": false,
+                        "autoplaySpeed": 5000
+                    }'>
+
+                                <div class="sb-testimonial--item">
+                                    <div class="items">
+                                        <div class="testimonial-text">
+                                            <div class="testimonial-text--inner">
+                                                Lorem ipsum dolor sit amet, conmetur asdipiscing elit,sed doeiusmod temporaceimdid tempora ut labore et dolore.
+                                            </div>
+                                        </div>
+                                        <div class="client-say-info">
+                                            <div class="testimonial-img-info">
+                                                <img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/testimonial/author1.png" alt="Sharon Stone" />
+                                            </div>
+                                            <div class="testimonial-info">
+                                                <h2 class="name">Sharon Stone</h2> <div class="position">Designer</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sb-testimonial--item">
+                                    <div class="items">
+                                        <div class="testimonial-text">
+                                            <div class="testimonial-text--inner">
+                                                Lorem ipsum dolor sit amet, conmetur asdipiscing elit,sed doeiusmod temporaceimdid tempora ut labore et dolore.
+                                            </div>
+                                        </div>
+                                        <div class="client-say-info">
+                                            <div class="testimonial-img-info">
+                                                <img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/testimonial/author2.png" alt="Johny Walker" />
+                                            </div>
+                                            <div class="testimonial-info">
+                                                <h2 class="name">Johny Walker</h2> <div class="position">Author Position</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sb-testimonial--item">
+                                    <div class="items">
+                                        <div class="testimonial-text">
+                                            <div class="testimonial-text--inner">
+                                                Lorem ipsum dolor sit amet, conmetur asdipiscing elit,sed doeiusmod temporaceimdid tempora ut labore et dolore.
+                                            </div>
+                                        </div>
+                                        <div class="client-say-info">
+                                            <div class="testimonial-img-info">
+                                                <img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/testimonial/author3.png" alt="John Doe" />
+                                            </div>
+                                            <div class="testimonial-info">
+                                                <h2 class="name">John Doe</h2> <div class="position">CEO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <article class="collapsed-block sb-tags" data-section-type="footer-webPages">
+                        <div class="widget-inner">
+                            <h5 class="footer-info-heading">
+                                Tags
+                                <span class="expander"><i class="fa fa-chevron-circle-down"></i></span>
+                            </h5>
+
+                            <ul class="blank footer-info-list list-inline">
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">fashion</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">women</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">men</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">t-shirt</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">jeans</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href=" ">accessories</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">jumpsuit</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">hat</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">jewelry</a>
+                                </li>
+
+                                <li class="list-inline-item">
+
+                                    <a href="#">watch</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </article>*@
+
+
+
+            </div>
+            <div class="col-xl-9 col-lg-9 col-sm-12 col-12 main-right">
+
+
+
+                <div class="module extraslider--banner_none extraslider--seller">
+                    <div class="box-slider-title">
+                        <h5 class="block-title-section">
+
+                            <span style="background-color:#1f2534; margin-bottom:0; border-top-left-radius:3px;border-bottom-right-radius:3px;padding:11px 20px;color:white">
+                                Sản Phẩm Mới
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="block-content">
+                        <div class="row">
+
+
+
+                            <div class="sb-extraslider-container col-sm-12">
+
+
+                                <section class="productCarousel products-list "
+                                         data-slick='{
+        "dots": false,
+        "infinite": true,
+        "mobileFirst": true,
+        "slidesToShow": 4,
+        "slidesToScroll": 1,
+        "responsive": [
+		{
+			"breakpoint": 1199,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 4
+			}
+		},
+		{
+			"breakpoint": 991,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 3
+			}
+		},
+		{
+			"breakpoint": 767,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 3
+
+			}
+		},
+		{
+			"breakpoint": 567,
+			"settings": {
+			"slidesToScroll": 1,
+			"slidesToShow": 2
+			}
+		},
+		{
+			"breakpoint": 320,
+			"settings": {
+			"slidesToScroll": 1,
+			"slidesToShow": 1
+			}
+		},
+		{
+			"breakpoint": 0,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 1
+			}
+		}
+        ]
+    }'>
+                                    @foreach (var item in ListNewProduct)
+                                    {
+                                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                        <div class="first-side productCarousel-slide product-layout product-grid">
+                                            <article class="product-item-container ">
+                                                <div class="left-block ">
+                                                    @if (item.PromotionPrice != null && item.PromotionPrice < item.Price)
+                                                    {
+                                                        <div class="sale-flag-discount">
+                                                            <span class="sale-text">Sale</span>
+                                                        </div>
+                                                    }
+                                                    else if (item.PromotionPrice != null && item.PromotionPrice > item.Price)
+                                                    {
+                                                        @*<div class="sale-flag-discount">
+                                                                <span class="sale-text">NEW</span>
+                                                            </div>*@
+                                                    }
+                                                    else
+                                                    {
+                                                        @*<div class="sale-flag-discount">
+                                                                <span class="sale-text">NEW</span>
+                                                            </div>*@
+
+                                                    }
+
+
+                                                    <a href="@url" class="product-item-photo">
+                                                        <img class="img-responsive lazyload" data-sizes="auto" src="@item.Image" alt="" title="">
+                                                    </a>
+
+
+
+
+
+                                                </div>
+
+                                                <div class="right-block" data-card-body="103">
+                                                    <h4 class="card-title">
+                                                        <a href="@url">@item.Name</a>
+
+                                                    </h4>
+                                                    @*<p class="card-text" data-test-info-type="brandName">OFS</p>*@
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+                                                        @if (item.PromotionPrice != null)
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", @item.PromotionPrice)  </span>
+                                                            <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", item.Price)</span>
+                                                        }
+                                                        else if (item.PromotionPrice == null)
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", item.Price)</span>
+                                                        }
+
+
+
+                                                        <!--Was:-->
+
+
+                                                    </div>
+
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="description">
+
+                                                        The last laundry cart you'll ever buy. This industrial non-collapsable cart is constructed with a steel framed body using heavyweight canvas capped with a soft leather rim sitting on four smooth...
+                                                    </div>
+
+                                                    <div class="button-group">
+
+
+
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="/them-gio-hang?productId=@item.ID&quantity=1" @*data-addtocart data-product-id="103"*@ @*data-wait-message="Add to Cart" class="action-link  button--cart"*@ title="Thêm vào giỏ hàng"><i class="fas fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                        </div>
+
+                                    }
+
+
+
+                                </section>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="module sb-banner sb-banner--custom_banners_2 ">
+                    <div class="row">
+                        <div class="col-sm-12 col-12">
+
+
+                            <div class="block-content clearfix d-flex flex-row">
+
+
+
+                                <div class="banners info-">
+                                    <div class="banner-figure">
+
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner3.png" alt=" " />
+                                        </a>
+                                    </div>
+
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="module extraslider--banner_none extraslider--seller">
+                    <div class="box-slider-title">
+                        <h5 class="block-title-section">
+
+                            <span style="background-color:#1f2534; margin-bottom:0; border-top-left-radius:3px;border-bottom-right-radius:3px;padding:11px 20px;color:white">
+                                Featured Products
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="block-content">
+                        <div class="row">
+
+
+
+                            <div class="sb-extraslider-container col-sm-12">
+
+
+                                <section class="productCarousel products-list "
+                                         data-slick='{
+        "dots": false,
+        "infinite": true,
+        "mobileFirst": true,
+        "slidesToShow": 4,
+        "slidesToScroll": 1,
+        "responsive": [
+		{
+			"breakpoint": 1199,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 4
+			}
+		},
+		{
+			"breakpoint": 991,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 3
+			}
+		},
+		{
+			"breakpoint": 767,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 3
+
+			}
+		},
+		{
+			"breakpoint": 567,
+			"settings": {
+			"slidesToScroll": 1,
+			"slidesToShow": 2
+			}
+		},
+		{
+			"breakpoint": 320,
+			"settings": {
+			"slidesToScroll": 1,
+			"slidesToShow": 1
+			}
+		},
+		{
+			"breakpoint": 0,
+			"settings": {
+				"slidesToScroll": 1,
+				"slidesToShow": 1
+			}
+		}
+        ]
+    }'>
+                                    @foreach (var item in ListFeatureProduct)
+                                    {
+                                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                        <div class="first-side productCarousel-slide product-layout product-grid">
+                                            <article class="product-item-container ">
+                                                <div class="left-block ">
+                                                    @if (item.PromotionPrice != null)
+                                                    {
+                                                        <div class="sale-flag-discount">
+                                                            <span class="sale-text">Sale</span>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+
+
+
+                                                    <a href="@url" class="product-item-photo">
+                                                        <img class="img-responsive lazyload" data-sizes="auto" src="@item.Image" alt="" title="">
+                                                    </a>
+
+
+
+
+                                                </div>
+
+                                                <div class="right-block" data-card-body="103">
+                                                    <h4 class="card-title">
+                                                        <a href="@url">@item.Name</a>
+
+                                                    </h4>
+                                                    @*<p class="card-text" data-test-info-type="brandName">OFS</p>*@
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+                                                        @if (item.PromotionPrice != null)
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", @item.PromotionPrice)  </span>
+                                                            <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", item.Price)</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 đ}", item.Price)</span>
+                                                        }
+
+
+
+                                                        <!--Was:-->
+
+
+                                                    </div>
+
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="description">
+
+                                                        The last laundry cart you'll ever buy. This industrial non-collapsable cart is constructed with a steel framed body using heavyweight canvas capped with a soft leather rim sitting on four smooth...
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="/them-gio-hang?productId=@item.ID&quantity=1" title="Thêm vào giỏ hàng"><i class="fas fa-shopping-basket"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+                                        </div>
+                                    }
+
+
+
+                                </section>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="module sb-banner sb-banner--custom_banners_3 ">
+                    <div class="row">
+                        <div class="col-sm-12 col-12">
+
+
+                            <div class="block-content clearfix d-flex flex-row">
+
+
+
+                                <div class="banners info-1">
+                                    <div class="banner-figure">
+
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner4.png" alt=" " />
+                                        </a>
+                                    </div>
+
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="banners info-2">
+                                    <div class="banner-figure">
+
+                                        <a href="/">
+                                            <img class="img-fluid" src="~/Assets/Client/TemplateUI/ClickBoom/cdn11.bigcommerce.com/s-5jeysafj8q/content/home1/banners/custom_banner5.png" alt=" " />
+                                        </a>
+                                    </div>
+
+                                    <div class="banner-figcaption">
+                                        <div class="banner-figcaption__body">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                @*<div class="module extraslider--banner_none extraslider--seller">
+                    <h5 class="block-title">
+                        <span style="background-color:#1f2534; margin-bottom:0; border-top-left-radius:3px;border-bottom-right-radius:3px;padding:11px 20px;color:white">
+                            BEST SELLERS
+                        </span>
+                    </h5>
+                    <div class="block-content">
+                        <div class="row">
+
+
+
+                            <div class="sb-extraslider-container col-12">
+
+                                <section class="products-list productCarousel "
+                                         data-slick='{
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+		"arrows": true,
+        "responsive": [
+            {
+                "breakpoint": 1199,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 3
+                }
+                                    },
+            {
+                "breakpoint": 991,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 2
+                }
+            },
+            {
+                "breakpoint": 767,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 2
+
+                }
+            },
+            {
+                "breakpoint": 567,
+                "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 2
+                }
+            },
+            {
+                "breakpoint": 320,
+                "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 1
+                }
+            },
+            {
+                "breakpoint": 0,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 1
+                }
+            }
+        ]
+    }'>
+
+
+                                    <div class="first-side productCarousel-slide product-layout product-list">
+
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="able-brewing-system-care/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/86/400/17__64916.1542788505.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="able-brewing-system-care/index.html">Able Brewing System Care</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $225.00</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cart71c0.html?action=add&amp;product_id=86" data-addtocart data-product-id="86" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=86" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="86" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+
+
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="tiered-wire-basket-detergent/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/97/392/13__59342.1542788388.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="tiered-wire-basket-detergent/index.html">Tiered Wire Basket Detergent</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $119.95</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cart6478.html?action=add&amp;product_id=97" data-addtocart data-product-id="97" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=97" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="97" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+
+                                    <div class="productCarousel-slide product-layout product-list">
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="canvas-laundry-cart-small/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/103/385/4__17897.1542788297.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="canvas-laundry-cart-small/index.html">Canvas Laundry Cart - Small</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $200.00</span>
+
+
+                                                        <!--Was:-->
+                                                        <span data-product-non-sale-price-without-tax class="price price--rrp"> $249.00</span>
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cartdcc5.html?action=add&amp;product_id=103" data-addtocart data-product-id="103" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=103" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="103" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+
+
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="chemex-coffeemaker-3-cup/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/88/403/11__19589.1542788561.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="chemex-coffeemaker-3-cup/index.html">Chemex Coffeemaker 3 Cup</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $49.50</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cart8c7c.html?action=add&amp;product_id=88" data-addtocart data-product-id="88" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=88" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="88" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+
+                                    <div class="productCarousel-slide product-layout product-list">
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="fog-linen-chambray-towel-beige-stripe/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/77/409/12__31373.1542788712.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="fog-linen-chambray-towel-beige-stripe/index.html">Fog Linen Chambray Towel - Beige Stripe</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $49.00</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="#" class="quickview action-link  button--cart" data-animation="false" data-product-id="77" title="Choose Options"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=77" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="77" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+
+
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="orbit-terrarium-large/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/80/415/14__02275.1542788813.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="orbit-terrarium-large/index.html">Orbit Terrarium - Large</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingFull">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingFull">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingFull">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingFull">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $109.00</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cart964e.html?action=add&amp;product_id=80" data-addtocart data-product-id="80" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=80" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="80" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+
+                                    <div class="productCarousel-slide product-layout product-list">
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="oak-cheese-grater/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/94/394/8__72073.1542788423.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="oak-cheese-grater/index.html">Oak Cheese Grater</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $34.95</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cartfa27.html?action=add&amp;product_id=94" data-addtocart data-product-id="94" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=94" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="94" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+
+
+                                        <article class="product-item-container product-row ">
+                                            <div class="item">
+                                                <div class="left-block">
+                                                    <a href="orbit-terrarium-small/index.html" class="product-item-photo">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/100x100/products/81/406/6__10134.1542788601.jpg?c=2" alt="" width="85" height="85">
+                                                    </a>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h4 class="card-title">
+                                                        <a href="orbit-terrarium-small/index.html">Orbit Terrarium - Small</a>
+                                                    </h4>
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+
+                                                        <span data-product-price-without-tax class="price price--withoutTax"> $89.00</span>
+
+
+
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="cartfcf3.html?action=add&amp;product_id=81" data-addtocart data-product-id="81" data-wait-message="Add to Cart" class="action-link  button--cart" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-basket"></i></a>
+                                                        </div>
+
+
+                                                        <div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=81" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="action-item quickview">
+                                                            <a href="#" class="quickview btn-button" data-animation="false" data-product-id="81" title="Quick view"> <i class="fa fa-search"></i></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+
+
+                                </section>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+                <div class="module sb-brand sb-brand--static_brand ">
+                    <h5 class="footer-info-heading">
+                        <span style="background-color:#1f2534; margin-bottom:0; border-top-left-radius:3px;border-bottom-right-radius:3px;padding:11px 20px;color:white">
+                            SHOP BY BRAND
+                        </span>
+                    </h5>
+                    <div class="block-content clearfix">
+                        <div class="sb-brand--carousel d-flex justify-content-between "
+                             data-slick='{
+				"rows": 2,
+		        "dots": false,
+		        "infinite": true,
+		        "mobileFirst": true,
+		        "slidesToShow": 5,
+				"slidesToScroll": 1,
+		        "responsive": [
+		            {
+		                "breakpoint": 1200,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 5
+		                }
+		            },
+					{
+		                "breakpoint": 992,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 4
+		                }
+		            },
+		            {
+		                "breakpoint": 768,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+		            {
+		                "breakpoint": 0,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 2
+		                }
+		            }
+		        ]
+		    }'>
+                            @foreach (var item in ListBrand)
+                            {
+                                <div class="sb-brand--item">
+
+                                    <a href="@item.Link" title="@item.Name"><img class="img-fluid lazyload" src="@item.Image" title="@item.Name"  /></a>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*<div class="module sb-latestblog">
+                    <h5 class="block-title">
+                        <i class="fa fa-"></i>
+                        <span style="background-color:#1f2534; margin-bottom:0; border-top-left-radius:3px;border-bottom-right-radius:3px;padding:11px 20px;color:white">
+                            Bài viết
+                        </span>
+                    </h5>
+                    <div class="block-content">
+                        <div class="latest-blog--carousel "
+                             data-slick='{
+		        "dots": false,
+		        "infinite": false,
+		        "mobileFirst": true,
+		        "slidesToShow": 1,
+		        "slidesToScroll": 3,
+		        "responsive": [
+		            {
+		                "breakpoint": 1200,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+					{
+					"breakpoint": 991,
+						"settings": {
+							"slidesToScroll": 1,
+							"slidesToShow": 3
+						}
+					},
+					{
+						"breakpoint": 400,
+						"settings": {
+							"slidesToScroll": 1,
+							"slidesToShow": 2
+
+						}
+					},
+					{
+						"breakpoint": 0,
+						"settings": {
+							"slidesToScroll": 1,
+							"slidesToShow": 1,
+							"arrows": false
+						}
+					}
+		        ]
+		    }'>
+                            @foreach (var item in ListContent)
+                            {
+                                var url = "/chi-tiet-bai-viet/" + item.MetaTitle + "-" + item.ID;
+                                <div class="productCarousel-slide">
+                                    <article class="blog-post product-grid">
+
+                                        <div class="blog-post-figure">
+                                            <figure class="blog-thumbnail">
+                                                <a href="@url">
+                                                    <img data-sizes="auto" class="img-fluid lazyload " src="@item.Image" alt="Proin dictum justo a nisl." title="@item.Name">
+                                                </a>
+                                                <div class="blog-meta" title="@item.CreateDate.">
+                                                    @if (item.CreateDate != null)
+                                                    {
+                                                        <span class="post-date-month">
+
+                                                            @item.CreateDate.Value.ToString("MMM")
+                                                        </span>
+                                                        <span class="post-date-day"> @item.CreateDate.Value.Day</span>
+                                                    }
+                                                </div>
+                                            </figure>
+                                        </div>
+
+                                        <div class="blog-header">
+                                            <h2 class="blog-title">
+                                                <a href="@url">@item.Name</a>
+                                            </h2>
+                                        </div>
+
+                                        <div class="blog-post-body">
+
+
+                                            <p class="article-description ">
+                                                @item.Description
+                                            </p>
+
+
+                                            <div class="clear"></div>
+
+                                            <a href="@url" class="btn--readmore">Đọc <i class="fa fa-arrow-circle-right"></i></a>
+
+
+
+                                        </div>
+                                    </article>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+
+}
+</div>

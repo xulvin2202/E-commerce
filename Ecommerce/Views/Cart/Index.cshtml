@@ -1,0 +1,186 @@
+﻿@model List<Ecommerce.Models.CartItem>
+@{
+   
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+
+    <script src="/Scripts/cartController.js"></script>
+}
+
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg ">
+        <div class="entry-header" style="background-image: url(../../Image/8.png);">
+            <h3 class="entry-title">
+                Giỏ hàng
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" ref="nofollow" class="breadcrumb-label">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/gio-hang" class="breadcrumb-label">
+                        Giỏ hàng
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+    <div class="page container">
+        @if (Model.Count > 0)
+        {
+            <main class="page-content" data-cart>
+
+                <h1 class="page-heading" data-cart-page-title>
+                    Giỏ hàng (@Model.Count() sản phẩm)
+                </h1>
+
+                <div data-cart-status>
+                </div>
+
+                <div class="loadingOverlay"></div>
+               
+                    <div data-cart-content>
+                        <table class="cart" data-cart-quantity="10">
+
+                            <thead class="cart-header">
+                                <tr>
+                                    <th class="cart-header-item" colspan="2">Sản Phẩm</th>
+                                    <th class="cart-header-item">Giá</th>
+                                    <th class="cart-header-item cart-header-quantity">Số lượng</th>
+                                    <th class="cart-header-item">Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cart-list">
+                                @foreach (var item in Model)
+                                {
+                                    var url = "/chi-tiet/" + @item.Product.MetaTitle + "-" + @item.Product.ID;
+                                    <tr class="cart-item" data-item-row>
+                                        <td class="cart-item-block cart-item-figure">
+                                            <img class="cart-item-image lazyload" data-sizes="auto" width="100" src="@item.Product.Image" alt="Tiered Wire Basket Detergent" title="Tiered Wire Basket Detergent">
+                                        </td>
+                                        <td class="cart-item-block cart-item-title">
+                                            @*<p class="cart-item-brand">OFS</p>*@
+                                            <h4 class="cart-item-name"><a href="@url">@item.Product.Name</a></h4>
+
+
+
+
+
+                                        </td>
+                                        <td class="cart-item-block cart-item-info">
+                                            <span class="cart-item-label">Price</span>
+                                            @if (item.Product.PromotionPrice != null)
+                                            {
+                                                <span class="cart-item-value ">@String.Format("{0:#,0 }", @item.Product.PromotionPrice)</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="cart-item-value ">@String.Format("{0:#,0 }", @item.Product.Price)</span>
+                                            }
+                                        </td>
+
+                                        <td class="cart-item-block cart-item-info cart-item-quantity">
+
+                                            <label class="form-label cart-item-label" for="qty-91fd16c7-033d-4975-a045-fd19ee352e20">Quantity:</label>
+                                            <div class="form-increment">
+
+                                                <input type="number" class="txtQuantity"
+                                                       value="@item.Quantity"
+                                                       min="1"
+                                                       data-id="@item.Product.ID">
+
+                                            </div>
+
+                                        </td>
+
+                                        <td class="cart-item-block cart-item-info">
+                                            <span class="cart-item-label">Total</span>  
+
+                                            @if (item.Product.PromotionPrice != null)
+                                            {
+                                                <strong class="cart-item-value "> @((item.Product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0")) </strong>
+                                            }
+                                            else
+                                            {
+                                                <strong class="cart-item-value "> @((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) </strong>
+                                            }
+                                            <a class="btn-delete" data-id="@item.Product.ID"  href="#">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="container">
+                            <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row">
+                                <a href="#" id="btnContinue" class="button button--primary">Tiếp tục mua hàng</a>
+                                <a href="#" id="btnUpdate" class="button button--primary">Cập Nhật</a>
+                                @*<a href="#" id="btnPayment" class="button button--primary">Thanh Toán</a>*@
+                                <a href="#" id="btnDeleteAll" class="button button--primary">Xóa Toàn Bộ</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div data-cart-totals>
+                        <ul class="cart-totals">
+                            <li class="cart-total">
+                                @*<div class="cart-total-label">
+                                    <strong>Subtotal:</strong>
+                                </div>*@
+                                <div class="cart-total-value" @*data-subtotal="$1,038.50"*@>
+                                    @*<span>@ViewBag.Total</span>*@
+                                </div>
+                            </li>
+                           
+                            <li class="cart-total">
+                                <div class="cart-total-label">
+                                    <strong>Tổng:</strong>
+                                </div>
+                                <div class="cart-total-value cart-total-grandTotal">
+                                    <span>@String.Format("{0:0,0 đ}",ViewBag.Total)</span> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+              
+                <div class="cart-actions">
+                    <a class="button button--primary" id="btnPayment" href="#" title="Nhấn vào để thanh toán">Thanh Toán</a>
+                </div>
+
+
+                <!-- snippet location cart -->
+            </main>
+        }
+        else
+        {
+            <span >Chưa có sản phẩm nào trong giỏ hàng !</span>
+        }
+    </div>
+
+
+</div>

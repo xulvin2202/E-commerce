@@ -1,0 +1,9 @@
+﻿@model List<Model.EF.Menu>
+    <ul class="navPages-list">
+        @foreach(var item in Model)
+        {
+        <li class="navPages-item navPages-item-page">
+            <a class="navPages-action" ref="nofollow" href="@item.Link" target="@item.Target">@item.Text</a>
+        </li>
+        }
+    </ul>

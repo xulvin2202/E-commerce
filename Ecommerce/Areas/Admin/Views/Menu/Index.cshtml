@@ -1,0 +1,53 @@
+﻿@model List<Model.EF.Menu>
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{Menu}
+@section jsFooter{}
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="tab-content mt-0">
+                <div class="tab-pane active show" id="Users">
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-custom spacing8">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="w60">Text</th>
+                                    <th>Link</th>
+                                    <th>Target</th>
+                                    <th class="w100">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <th>@item.Text</th>
+                                    <th>@item.Link</th>
+                                    <th>@item.Target</th>
+                                    <td>
+                                        @item.Status
+                                    </td>
+
+                                    <td>
+                                        <a href="~/Admin/Menu/Edit/@item.ID" class="btn btn-purple waves-effect waves-light" title="Edit"><i class="icon-pencil"></i></a>
+                                       
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

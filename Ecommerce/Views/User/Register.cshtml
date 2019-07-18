@@ -1,0 +1,171 @@
+﻿@model Ecommerce.Models.RegisterModel
+@using BotDetect.Web.UI.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+@{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha"); }
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg " style="background-image: url(../../Image/7.jpg);">
+        <div class="entry-header">
+            <h3 class="entry-title">
+               Đăng ký
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" class="breadcrumb-label">
+                        Home
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/dang-ky" class="breadcrumb-label">
+                        Đăng ký
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main-body clearfix sidebar--left">
+
+
+        <div class="container">
+            <h1 class="page-heading">Đăng ký thành viên</h1>
+            <div class="form-group">
+                @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Success</div>
+                }
+            </div>
+            <div class="account account--fixed">
+                <div class="account-body">
+                  
+                        <div class="form-group">
+                            <div class="form-row form-row--half">
+                                <div class="form-field" id="FormField_1" data-validation="{&quot;type&quot;:&quot;singleline&quot;,&quot;label&quot;:&quot;Email Address&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="EmailAddress">
+                                    <label class="form-label" for="FormField_1_input">
+                                        Tài khoản
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="text" id="UserName" data-label="Email Address" name="UserName" class="form-input" placeholder="Tài khoản" autocomplete="off" autofocus aria-required="true" data-field-type="EmailAddress">
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Mật khẩu
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="password" class="form-input" id="Password" data-label="Password" name="Password" value="" autocomplete="off" placeholder="Mật khẩu" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Nhập lại mật khẩu
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="password" class="form-input" id="ConfirmPassword" data-label="Password" name="ConfirmPassword" value="" placeholder=" Nhập lại mật khẩu" autocomplete="off" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Tên
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="text" class="form-input" id="Name" data-label="Password" name="Name" value="" autocomplete="off" placeholder="Tên" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Địa chỉ
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="text" class="form-input" id="Address" data-label="Password" name="Address" value="" placeholder="Địa chỉ" autocomplete="off" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Email
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="email" class="form-input" id="Email" data-label="Password" name="Email" value="" placeholder="Email" autocomplete="off" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    <label class="form-label" for="FormField_2_input">
+                                        Điện thoại
+                                        <small>Required</small>
+                                    </label>
+                                    <input type="text" class="form-input" id="Phone" data-label="Password" name="Phone" value="" placeholder="Điện thoại" autocomplete="off" aria-required="true" data-field-type="Password">
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-field" id="FormField_2" data-validation="{&quot;type&quot;:&quot;password&quot;,&quot;label&quot;:&quot;Password&quot;,&quot;required&quot;:true,&quot;maxlength&quot;:0}" data-type="Password">
+                                    @Html.Captcha(registerCapcha)
+                                    @Html.TextBox("CaptchaCode")
+                               
+                                </div>
+
+                                @*<div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        @Html.Captcha(registerCapcha)
+                                        @Html.TextBox("CaptchaCode")
+                                    </div>
+                                </div>*@
+                                @*<div class="form-group">
+            @Html.LabelFor(model => model.ProvinceID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.tex(model => model.ProvinceID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DistrictID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.DistrictID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                                @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.Captcha(registerCapcha)
+                @Html.TextBox("CaptchaCode")
+            </div>
+        </div>*@
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-4">
+                                        <input type="submit" value="Đăng ký" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+        
+                    
+                </div>
+</div>
+</div>
+
+</div>}

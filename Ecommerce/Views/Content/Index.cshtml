@@ -1,0 +1,227 @@
+﻿@model PagedList.IPagedList<Model.EF.Content>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "bai viet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Listcontent = (List<Model.EF.Content>)ViewBag.Content;
+    var cate = (List<Model.EF.ContentCategory>)ViewBag.Cate;
+}
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg " style="background-image: url(../../Image/3.jpg);">
+        <div class="entry-header">
+            <h3 class="entry-title">
+                Bài viết
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" class="breadcrumb-label">
+                        Trang Chủ
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/bai-viet" class="breadcrumb-label">
+                        Bài viết
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+
+    <main class="page page--blog container">
+
+        <div class="row">
+            <div class="col-xl-9 col-lg-9 col-md-12 page-content">
+                <div class=" row filters-panel">
+                    <div class="col-sm-12 view-mode">
+                        <div class="sidebar-overlay"></div>
+                        <a href="javascript:void(0)" class="open-sidebar d-md-block d-lg-none"><i class="fa fa-bars"></i> Sidebar </a>
+
+                        @*<div class="list-view">
+                                <div class="btn btn-gridview">View as: </div>
+                                <button type="button" id="grid-view" class="btn btn-default grid hidden-md-down" title=""><i class="fa fa-th-large"></i></button>
+                                <button type="button" id="list-view" class="btn btn-default list " title=""><i class="fa fa-bars"></i></button>
+                            </div>*@
+                    </div>
+                </div>
+
+                <div class="row blog-category">
+                    @foreach (var item in Model)
+                    {
+                        var url = "/chi-tiet-bai-viet/" + item.MetaTitle + "-" + item.ID;
+                        <article class="blog-post  blog--has-socials">
+                            <div class="wrap">
+                                <div class="blog-post-figure">
+                                    <figure class="blog-thumbnail">
+                                        <a href="@url">
+                                            <img class="card-image lazyload" src="@item.Image" style="width:30%;height:30%"  alt="Proin dictum justo a nisl." title="@item.Name">
+                                        </a>
+                                    </figure>
+                                </div>
+
+                                <div class="blog-post-body ">
+                                    <div class="blog-meta" title="@item.CreateDate.">
+                                        @if (item.CreateDate != null)
+                                        {
+                                            <span class="post-date-month">
+
+                                                @item.CreateDate.Value.ToString("MMM")
+                                            </span>
+                                            <span class="post-date-day"> @item.CreateDate.Value.Day</span>
+                                        }
+                                    </div>
+                                    <div class="blog-header">
+                                        <h2 class="blog-title">
+                                            <a href="@url">@item.Name</a>
+                                        </h2>
+                                    </div>
+
+                                    <div class="blog-post-content">
+                                        <p class="article-description">
+
+                                            @{
+
+                                                string x = item.Description;
+
+                                                if (x != null && x.Length > 60)
+                                                {
+                                                    x = x.Substring(0, 60);
+                                                }
+                                            }
+                                            @Html.Raw(x)<text>...</text>
+
+                                        </p>
+
+                                        <div class="clear"></div>
+
+                                        <a href="@url" class="btn--readmore"> Đọc <i class="fa fa-arrow-circle-right"></i></a>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    }
+
+                    <script type="text/javascript">
+                        reinitView();
+                        function reinitView() {
+                            $('.view-mode .list-view button').bind("click", function () {
+                                $(this).parent().find('button').removeClass('active');
+                                $(this).addClass('active');
+                            });
+                            // Product List
+                            $('#list-view').click(function () {
+                                $('.page--blog .blog-post').attr('class', 'blog-post product-list col-sm-12');
+                                localStorage.setItem('blogview', 'list');
+                            });
+
+                            // Product Grid
+                            $('#grid-view').click(function () {
+                                $('.page--blog .blog-post').attr('class', 'blog-post product-grid col-sm-6 col-12');
+                                localStorage.setItem('blogview', 'grid');
+                            });
+
+
+                            if (localStorage.getItem('blogview') == null) localStorage.setItem('blogview', 'grid');
+
+                            if (localStorage.getItem('blogview') == 'grid') {
+                                $('#grid-view').trigger('click');
+                            } else {
+                                $('#list-view').trigger('click');
+
+                            }
+                        }
+
+                                //--></script>
+
+                </div>
+                <div class="pagination">
+                    <ul class="pagination-list">
+
+                        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <aside class="col-xl-3 col-lg-3 page-sidebar sidebar-offcanvas">
+
+                <div class="sidebarBlock">
+                    <span id="close-sidebar" class="fa fa-times"></span>
+                    <!-- BEGIN Side All Categories -->
+                    <!-- BEGIN Side All Categories -->
+                    <div class="module  sidebar--categories">
+                            <h5 class="block-title"> Danh mục bài viết</h5>
+                            <div class="block-content clearfix">
+                                <ul class="navList">
+                                    @foreach (var item in cate)
+                                    {
+                                        <li class="navList-item">
+                                            <a class="navList-action has-subMenu" href="/bai-viet/@item.MetaTitle-@item.ID"> @item.Name </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                    <div class="module block-recent">
+                        <h5 class="block-title">Recent Posts</h5>
+
+                        <div class="block-content">
+                            <ul class="blogRecent">
+                                @foreach (var item in Listcontent)
+                                {
+                                    var url = "/chi-tiet-bai-viet/" + item.MetaTitle + "-" + item.ID;
+                                    <li class="blogRecent--item">
+                                        <div class="blog-post-figure">
+                                            <figure class="blog-thumbnail">
+                                                <a href="@url">
+                                                    <img class="card-image lazyload" data-sizes="auto" src="@item.Image" alt="Proin dictum justo a nisl." title="@item.Name">
+                                                </a>
+                                            </figure>
+                                        </div>
+                                        <div class="blog-header">
+                                            <h4 class="blog-title">
+                                                <a href="@url">@item.Name</a>
+                                            </h4>
+                                            <div class="blog-meta">
+                                                <span class="blog-date"><i class="fa fa-calendar-o"></i> @item.CreateDate.Value.ToString("dd/MM/yyyy")  </span>
+                                            </div>
+                                        </div>
+
+
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+    </main>
+
+
+
+</div>
+

@@ -1,0 +1,157 @@
+﻿@model Model.EF.Contact
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    #map-canvas {
+        height: 600px;
+    }
+</style>
+@section jsFooter{
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="~/Scripts/contactController.js"></script>
+<script>
+
+        // This example displays a marker at the center of Australia.
+        // When the user clicks the marker, an info window opens.
+        //21.046300, 105.793266
+        function initMap() {
+            var uluru = { lat: 21.046300, lng: 105.793266 };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom: 18,
+                center: uluru
+            });
+
+            var contentString = '@Html.Raw(Model.Content)';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Địa chỉ'
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+
+}
+
+
+
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg" style="background-image: url(../../Image/5.jpg);">
+        <div class="entry-header">
+            <h3 class="entry-title">
+                Liên Hệ
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" ref="nofollow" class="breadcrumb-label">
+                        Home
+                    </a>
+                </li>
+
+                
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/lien-he" ref="nofollow" class="breadcrumb-label">
+                        Liên Hệ
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+
+
+    <main class="page page--contact container">
+
+
+
+        <div class="page-content row flex-row-reverse">
+            @*bản đồ*@
+            <div class="col-sm-12">
+                <div id="map-canvas">
+                    @Html.Raw(Model.Map)
+                   
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-8 col-md-8">
+                <h1 class="page-heading">Form Liên Hệ</h1>
+                <form data-contact-form class="form contact-us" method="post">
+
+
+                    <input type="hidden" name="page_id" id="page_id" value="4">
+                    <div class="form-row form-row--half">
+                        <div class="form-field">
+                            <label class="form-label" for="contact_fullname">Tên</label>
+                            <input class="form-input" type="text" id="txtName" autocomplete="off" value="">
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="contact_phone">Điện thoại</label>
+                            <input class="form-input" type="text" id="txtMobile" autocomplete="off" value="">
+                        </div>
+                        @*<div class="form-field">
+                            <label class="form-label" for="contact_phone">Phone Number</label>
+                            <input class="form-input" type="email" id="txtMobile" value="">
+                        </div>*@
+                        <div class="form-field">
+                            <label class="form-label" for="contact_email">
+                                Email
+                                <small>Required</small>
+                            </label>
+                            <input class="form-input" type="email" id="txtEmail" autocomplete="off" value="">
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="contact_orderno">Địa chỉ</label>
+                            <input class="form-input" type="text" autocomplete="off" id="txtAddress">
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="contact_question">
+                            Ý kiến khách hàng
+                            <small>Required</small>
+                        </label>
+                        <textarea name="contact_question" id="txtContent" autocomplete="off" rows="5" cols="50" class="form-input"></textarea>
+                    </div>
+                    <div class="form-actions text-left">
+                        <input class="button button--primary" type="submit" id="btnSend" value="Gửi">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4 col-md-4 content-contact">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </main>
+</div>

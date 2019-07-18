@@ -1,0 +1,88 @@
+﻿@model Model.EF.Content
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{Chi tiết bài viết}
+@section jsFooter{}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <dl class="dl-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Tên</label>
+                                <div class="col-sm-10">
+                                    @Model.Name
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Title</label>
+                                <div class="col-sm-10">
+                                    @Model.MetaTitle
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Mô tả</label>
+                                <div class="col-sm-10">
+                                    @Model.Description
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Ảnh</label>
+                                <div class="col-sm-10">
+
+                                    <img src="@Model.Image" style="width:50%;height:50%" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Chi tiết</label>
+                                <div class="col-sm-10">
+
+                                    @Html.Raw(Model.Detail)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Ngày đăng </label>
+                                <div class="col-sm-10">
+
+                                    @Model.CreateDate
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Bởi </label>
+                                <div class="col-sm-10">
+
+                                    @Model.CreateBy
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Trạng thái </label>
+                                <div class="col-sm-10">
+
+                                    @Model.Status
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Danh mục </label>
+                                <div class="col-sm-10">
+                                    @Model.Content_Category_ID
+                                </div>
+                            </div>
+                        </dl>
+                        <p>
+
+                            @Html.ActionLink("Quay lại", "Index")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

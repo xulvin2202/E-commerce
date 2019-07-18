@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<Model.EF.Order>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "QL bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{ Danh sách đơn hàng}
+@section jsFooter{
+    <script type="text/javascript">
+function getForm(){$('#dialog').dialog({
+            autoOpen: true,
+            width: 400,
+            resizable: false,
+            title: 'My Table',
+            modal: true,
+            open: function(event, ui) {
+
+                $(this).load('@Url.Action("PartialForm", "CONTROLLER")');
+            },
+            buttons: {
+                "Close": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+}</script>
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="responsive-table-plugin">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th data-priority="0">Mã đơn hàng</th>
+                                    <th data-priority="1">Tên</th>
+                                    <th data-priority="2">Điện thoại</th>
+                                    <th data-priority="3">Email</th>
+                                    <th data-priority="4">Địa chỉ</th>
+                                    <th data-priority="5">Ngày đặt hàng</th>
+                                    <th>
+                                        @using (Html.BeginForm("Export", "Order", FormMethod.Post))
+                                        {
+                                            <input type="submit" value="Xuất báo cáo" />
+                                        }
+                                                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.ID
+                                        </td>
+                                        <td>
+                                            @item.ShipName
+                                        </td>
+                                        <td>@item.ShipMobile</td>
+                                        <td>@item.ShipEmail</td>
+                                        <td>@item.ShipAddress</td>
+                                        <td>@item.CreateDate</td>
+                                        <td>
+                                          
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        
+                        <div class="pagination">
+                            <ul class="pagination-list">
+                                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

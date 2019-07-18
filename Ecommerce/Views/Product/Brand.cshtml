@@ -1,0 +1,300 @@
+﻿@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+
+
+@{
+    var category = (Model.EF.Category)ViewBag.Category;
+    ViewBag.Title = category.Name;
+    var mbrand = (Model.EF.Brand)ViewBag.Mbrand;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var categoryProduct = (List<Model.EF.Category>)ViewBag.Category;
+    var listallbrand = (List<Model.EF.Brand>)ViewBag.ListAllBrand;
+    var subcategory = (List<Model.EF.Category>)ViewBag.Subcategory;
+    var brand = (List<Model.EF.Brand>)ViewBag.ListBrand;
+    var Brand = (Model.EF.Brand)ViewBag.brand;
+    var cate = (List<Model.EF.Category>)ViewBag.Cate;
+
+}
+
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg ">
+        <div class="entry-header" style="background-color:#1f2534">
+            <h3 class="entry-title">
+
+                        @mbrand.Name
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" class="breadcrumb-label">
+                        Trang Chủ
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/san-pham/@mbrand.MetaTitle-@mbrand.ID" class="breadcrumb-label">
+                        @mbrand.Name
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+    <div class="container">
+        <div class="row page">
+
+            <aside class="col-xl-3 col-lg-3 page-sidebar sidebar-offcanvas" id="faceted-search-container">
+                <nav>
+                    <span id="close-sidebar" class=" fa fa-times"></span>
+                    @if (category.ParentID == null)
+                    {
+
+
+                        <!-- BEGIN Side All Categories -->
+                        <div class="module  sidebar--categories">
+                            <h5 class="block-title"> Danh Mục</h5>
+                            <div class="block-content clearfix">
+                                <ul class="navList">
+                                    @foreach (var item in cate)
+                                    {
+                                        //var link = "/san-pham/" + item.MetaTitle + "-" + item.ID;
+
+                                        <li class="navList-item">
+                                            <a class="navList-action has-subMenu is-current" href="/san-pham/@item.MetaTitle-@item.ID" style="color:black"> @item.Name </a>
+                                            
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                    }
+                    
+                    <div class="module  sidebar--categories">
+                        <h5 class="block-title"> Thương Hiệu</h5>
+                        <div class="block-content clearfix">
+                            <ul class="navList">
+                                @foreach (var item in brand)
+                                {
+                                    //var link = "/san-pham/" + item.MetaTitle + "-" + item.ID;
+
+                                    <li class="navList-item">
+                                        <a class="navList-action has-subMenu is-current" href="/thuong-hieu/@item.MetaTitle-@item.ID" style="color:black"> @item.Name </a>
+                                        <a class="navList-toggle" data-collapsible="navList-category-23"><i class="icon navList-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i></a>
+
+                                        <ul class="navList-subMenu-list" id="navList-category-23"></ul>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="col-xl-9 col-lg-9 page-content" id="product-listing-container">
+                <div class="products-category clearfix">
+                    @*<div class="form-group category-info">
+                            <h3 class="title-category ">Collections</h3>
+
+
+                            <div class="category-info__desc">
+                                <p>&nbsp;<img class="__mce_add_custom__" title="bottom-1-30432.jpg" src="../../cdn11.bigcommerce.com/s-5jeysafj8q/product_images/uploaded_images/bottom-1-30432.jpg" alt="bottom-1-30432.jpg" width="1170" height="200" /></p>
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat</p>
+                            </div>
+
+                        </div>*@
+
+                    <div class="refine-search form-group clearfix">
+                        <h3 class="title-category">Sản Phẩm</h3>
+
+                    </div>
+
+
+                    <form class=" row filters-panel" method="get" data-sort-by>
+                        <div class="col-sm-6 view-mode" data-reinitView="grid-3">
+                            <div class="sidebar-overlay"></div>
+                            <a href="javascript:void(0)" class="open-sidebar d-md-block d-lg-none"><i class="fa fa-bars"></i> Sidebar </a>
+
+
+                        </div>
+                        <div class="short-by-show col-sm-6 col-xs-12 ">
+
+
+                        </div>
+                    </form>
+
+                    <form action="https://sb-clickboom.mybigcommerce.com/compare" method='POST' data-product-compare>
+                        
+                        <div class="products-list row">
+                            @foreach (var item in Model)
+                            {
+                                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+
+                                <div class="product-layout product-grid product-grid-4 col-lg-3 col-md-4 col-12">
+                                    <article class="product-item-container ">
+                                        <div class="left-block ">
+                                            @if (item.PromotionPrice != null)
+                                            {
+                                                <div class="sale-flag-discount">
+                                                    <span class="sale-text">Sale</span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                            @*<div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="../../cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/93/397/10__85920.15427884574847.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/93/397/10__85920.1542788457.jpg?c=2" alt="1 L Le Parfait Jar" title="1 L Le Parfait Jar">
+                                                    </div>
+                                                    <div class="item-img " data-src="../../cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/93/398/16__18551.15427884584847.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/93/398/16__18551.1542788458.jpg?c=2" alt="1 L Le Parfait Jar" title="1 L Le Parfait Jar">
+                                                    </div>
+                                                    <div class="item-img " data-src="../../cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/93/399/21__42717.15427884584847.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/93/399/21__42717.1542788458.jpg?c=2" alt="1 L Le Parfait Jar" title="1 L Le Parfait Jar">
+                                                    </div>
+                                                </div>*@
+
+                                            <a href="@link" class="product-item-photo">
+                                                <img class="img-responsive lazyload" data-sizes="auto" src="@item.Image" data-src="@item.Image" alt="" title="">
+                                            </a>
+
+                                            <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="93" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                        </div>
+
+                                        <div class="right-block" data-card-body="93">
+                                            <h4 class="card-title">
+                                                <a href="@link">@item.Name</a>
+
+                                            </h4>
+                                            <p class="card-text" data-test-info-type="brandName">#</p>
+
+
+                                            <div class="price-section price-section--withoutTax ">
+
+                                                @if (item.PromotionPrice != null)
+                                                {
+                                                    <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 VND}", @item.PromotionPrice)  </span>
+                                                    <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", item.Price)</span>
+                                                }
+                                                else if (item.PromotionPrice == null)
+                                                {
+                                                    <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 VND}", item.Price)</span>
+                                                }
+
+                                            </div>
+
+
+                                            <div class="ratings ">
+                                                <div class="prod-rating" data-test-info-type="productRating">
+                                                    <span class="rating--small">
+                                                        <span class="icon icon--ratingFull">
+                                                            <svg>
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="icon icon--ratingFull">
+                                                            <svg>
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="icon icon--ratingFull">
+                                                            <svg>
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="icon icon--ratingFull">
+                                                            <svg>
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="icon icon--ratingFull">
+                                                            <svg>
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </span>
+                                                        <!-- snippet location product_rating -->
+
+                                                    </span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="description">
+                                                When translated Le Parfait means "the perfect one" - and that's just what this air-tight jar is. Designed for canning, these jars will ensure your harvest does not spoil, but is kept well-preserved for those cold winter months that lie ahead. Also can be...
+                                            </div>
+
+                                            <div class="button-group">
+
+                                                <div class="action-item wishlist">
+                                                    <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=93" data-wishlist-add>
+                                                        <input type="hidden" name="variation_id" value="">
+                                                        <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                        <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                            <i class="fa fa-heart"></i>
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+
+
+                                                <div class="action-item addToCart option">
+                                                    <a href="/them-gio-hang?productId=@item.ID&quantity=1" class="quickview action-link  button--cart" data-animation="false" data-product-id="93" title="Thêm vào giỏ hàng"><i class="fas fa-shopping-basket"></i> </a>
+                                                </div>
+
+
+                                                <div class="action-item compare ">
+                                                    <input class="form-check-input" type="checkbox" name="products[]" value="93" data-compare-id="93">
+                                                    <label class="form-check-label">
+                                                        <i class="fa fa-refresh"></i>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </article>
+                                </div>
+
+                            }
+                        </div>
+
+                    </form>
+                    <!--Phaan trang-->
+                    <div class="pagination">
+                        <ul class="pagination-list">
+
+                            @Html.PagedListPager(Model, Page => Url.Action("Brand", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+
+                        </ul>
+                    </div>
+
+                </div>
+
+            </main>
+
+
+        </div>
+    </div>
+
+
+</div>

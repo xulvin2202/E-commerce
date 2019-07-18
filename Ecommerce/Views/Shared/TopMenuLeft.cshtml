@@ -1,0 +1,8 @@
+﻿@model List<Model.EF.Menu>
+@foreach (var item in Model)
+{
+<div class="phone-support">
+    <i class="@item.Icon"></i>
+    <a href="@item.Link"><b>@item.Text</b></a>
+</div>
+}

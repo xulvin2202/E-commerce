@@ -1,0 +1,54 @@
+﻿@model List<Model.EF.Menu>
+
+
+@{
+    var session = (Common.UserLogin)Session[Common.CommonConstants.USER_SESSION];
+}
+@if (session == null)
+{
+    <ul class="navUser-section toplinks-wrapper">
+        
+        
+        <li class="navUser-item wishlist">
+            <a class="navUser-action cart-button cart-button--wishlist" href="dang-nhap-admin">
+                <i class="fa fa-female" aria-hidden="true"></i>
+            
+            </a>
+        </li>
+        
+        <li class="navUser-item">
+            <a class="navUser-action has-dropdown" href="#" data-dropdown="accountSelection" aria-controls="accountSelection" aria-expanded="false">
+                <i class="fa fa-user"></i>
+                Đăng nhập                <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" id="accountSelection" data-dropdown-content aria-hidden="true" tabindex="-1">
+
+                <li class="dropdown-menu-item"> <a href="/dang-nhap">Đăng nhập</a></li>
+                <li class="dropdown-menu-item">  <a href="/dang-ky">Đăng Ký</a></li>
+            </ul>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navUser-section toplinks-wrapper">
+
+
+        <li class="navUser-item wishlist">
+            <a class="navUser-action cart-button cart-button--wishlist" href="dang-nhap-admin">
+                <i class="fa fa-female" aria-hidden="true"></i>
+
+            </a>
+        </li>
+        <li class="navUser-item">
+            @Html.ActionLink("Thoát", "Logout", "User", null, new { @class = "nav-link active show" })
+        </li>
+        <li class="navUser-item">
+            <a class="navUser-action has-dropdown">
+                <i class="fa fa-user"></i>
+                Xin chào:@session.UserName
+
+            </a>
+        </li>
+    </ul>
+}

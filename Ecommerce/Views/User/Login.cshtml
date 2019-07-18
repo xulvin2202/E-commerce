@@ -1,0 +1,81 @@
+﻿@model Ecommerce.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg " style="background-image: url(../../Image/6.jpg);">
+        <div class="entry-header">
+            <h3 class="entry-title">
+                Đăng Nhập
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" class="breadcrumb-label">
+                        Home
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/dang-nhap" class="breadcrumb-label">
+                        Đăng nhập
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main-body clearfix sidebar--left">
+        <div class="account account--fixed">
+            <div class="account-body">
+
+                <div class="form-group">
+
+                    <div class="container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <input type="text" ss name="UserName" id="UserName" class="form-control" autocomplete="off" placeholder="Nhập tài khoản" style="border-radius:25px" />
+
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <input type="password" ss name="Password" id="Password" class="form-control" placeholder="Nhập mật khẩu" style="border-radius:25px" />
+                                <input type="checkbox" onclick="myFunction()">Hiển thị mật khẩu
+                            </div>
+                         
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Đăng nhập" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

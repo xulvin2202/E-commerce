@@ -1,0 +1,50 @@
+﻿@model Model.EF.QandA
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{Chỉnh sửa danh mục}
+@section jsFooter{}
+<div class="row">
+    <div class="col-12">
+
+        <div class="card-box">
+            @using (Html.BeginForm("Edit", "QandA", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="simpleinput">Question</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" autocomplete="off" autofocus id="Question" name="Question" placeholder="Question">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="simpleinput">Answer</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" autocomplete="off" autofocus id="Answer" name="Answer" placeholder="Answer">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lưu" class="btn btn-purple waves-effect waves-light" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        </div>
+    </div>
+</div>

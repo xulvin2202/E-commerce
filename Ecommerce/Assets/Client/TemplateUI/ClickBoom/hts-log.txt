@@ -1,0 +1,21 @@
+HTTrack3.49-2+htsswf+htsjava launched on Tue, 04 Jun 2019 08:36:21 at https://sb-clickboom.mybigcommerce.com/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://sb-clickboom.mybigcommerce.com/ -O1 "D:\TemplateUI\ClickBoom" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+08:41:25	Warning: 	Moved Permanently for https://sb-clickboom.mybigcommerce.com/smartphone/
+08:41:25	Warning: 	File has moved from https://sb-clickboom.mybigcommerce.com/smartphone/ to https://sb-clickboom.mybigcommerce.com/collections/
+08:46:57	Error: 	"Not Found" (404) at link https://sb-clickboom.mybigcommerce.com/pages.php?action=sendContactForm (from https://sb-clickboom.mybigcommerce.com/)
+08:49:48	Error: 	"Not Found" (404) at link sb-clickboom.mybigcommerce.com/https: (from https://sb-clickboom.mybigcommerce.com/checkout)
+08:49:54	Warning: 	Retry after error -4 (No data (connection closed)) at link https://sb-clickboom.mybigcommerce.com/1-l-le-parfait-jar/?setCurrencyId=1 (from https://sb-clickboom.mybigcommerce.com/1-l-le-parfait-jar/)
+08:49:54	Warning: 	Retry after error -4 (No data (connection closed)) at link https://sb-clickboom.mybigcommerce.com/1-l-le-parfait-jar/?setCurrencyId=2 (from https://sb-clickboom.mybigcommerce.com/1-l-le-parfait-jar/)
+08:50:11	Error: 	"Not Found" (404) at link https://cdn11.bigcommerce.com/shared/css/fonts/open_sans/RjgO7rYTmqiVp7vzi-Q5UYX0hVgzZQUfRDuZrPvH3D8.woff2 (from https://cdn11.bigcommerce.com/shared/css/open_sans-2c374369d08b2848673ff16370d132489125c335.css)
+08:50:11	Error: 	"Not Found" (404) at link https://cdn11.bigcommerce.com/shared/css/fonts/open_sans/xozscpT2726on7jbcb_pAoX0hVgzZQUfRDuZrPvH3D8.woff2 (from https://cdn11.bigcommerce.com/shared/css/open_sans-2c374369d08b2848673ff16370d132489125c335.css)
+08:50:11	Error: 	"Not Found" (404) at link https://cdn11.bigcommerce.com/shared/css/fonts/open_sans/59ZRklaO5bWGqF5A9baEEYX0hVgzZQUfRDuZrPvH3D8.woff2 (from https://cdn11.bigcommerce.com/shared/css/open_sans-2c374369d08b2848673ff16370d132489125c335.css)
+08:50:11	Error: 	"Not Found" (404) at link https://cdn11.bigcommerce.com/shared/css/fonts/open_sans/u-WUoqrET9fUeobQW7jkRYX0hVgzZQUfRDuZrPvH3D8.woff2 (from https://cdn11.bigcommerce.com/shared/css/open_sans-2c374369d08b2848673ff16370d132489125c335.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 13 minutes 53 seconds : 792 links scanned, 780 files written (136426921 bytes overall) [41218594 bytes received at 49482 bytes/sec], 119800550 bytes transferred using HTTP compression in 542 files, ratio 19%, 7.1 requests per connection
+(6 errors, 4 warnings, 0 messages)

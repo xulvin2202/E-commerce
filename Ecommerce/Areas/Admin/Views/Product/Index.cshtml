@@ -1,0 +1,120 @@
+﻿@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{Danh sách sản phẩm}
+@section jsFooter{
+    <script src="~/Scripts/productController.js"></script>}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#Users">Danh sách</a></li>
+                <li class="nav-item">@Html.ActionLink("Tạo mới", "Create", null, new { @class = "nav-link" })</li>
+            </ul>
+            <div class="tab-content mt-0">
+                <div class="tab-pane active show" id="Users">
+                    <div class="table-responsive">
+                        @*<div class="body">
+                                @using (Html.BeginForm("Index", "Content", FormMethod.Get))
+                                {
+                                    <form id="navbar-search" class="navbar-form search-form">
+                                        <div class="input-group mb-0">
+                                            <input type="text" class="form-control" value="@ViewBag.SearchStringContent" name="searchStringContent" placeholder="Search..." autocomplete="off">
+                                            <div class="input-group-append">
+                                                <button href="javascript:void(0);" class="btn btn-success" title="" type="submit">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                }
+                            </div>*@
+                        <table class="table table-hover table-custom spacing8">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="w60">Tên</th>
+
+                                    <th>Giá</th>
+                                    <th>Giá Sale</th>
+                                    <th>Mô tả</th>
+
+                                    <th>Ngày tạo</th>
+                                    <th class="w100">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@item.Image" data-toggle="tooltip" data-placement="top" alt="Avatar" style="width:100px;height:100px" class="w35 h35 rounded" title="@item.Name">
+                                        </td>
+                                        <td>
+                                            <h4 class="mb-0">
+                                                @item.Name
+                                            </h4>
+                                            <label class="mb-0">
+                                                @item.MetaTitle
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:#,0 Đồng}", @item.Price)
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:#,0 Đồng}", @item.PromotionPrice)
+                                        </td>
+                                        <td>
+                                            @*@Html.Raw(item.Description)*@
+
+                                            @{
+
+                                                string x = item.Description;
+
+                                                if (x != null && x.Length > 60)
+                                                {
+                                                    x = x.Substring(0, 60);
+                                                }
+                                            }
+                                            @Html.Raw(x)<text>...</text>
+                                        </td>
+
+                                        <td>
+                                            @item.CreateDate
+                                        </td>
+                                        <td><a href="#" class="btn btn-outline-success" data-id="@item.ID">@(item.Status ? "InStock" : "OutStock")</a></td>
+                                        <td>
+                                            <a href="~/Admin/Product/Edit/@item.ID" class="btn btn-purple waves-effect waves-light" style="width:45px" title="Sửa"><i class="icon-pencil"></i></a>
+                                            <a href="~/Admin/Product/Detail/@item.ID" class="btn btn-purple waves-effect waves-light" style="width:45px" title="Chi tiết"><i class="far fa-sticky-note"></i></a>
+                                            @Ajax.ActionLink("Xóa", "Delete",null, new { @id = item.ID }, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn chắc chắn muốn xóa ?",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                           HttpMethod = "Delete",
+                                       }, new {
+                                           @class = "btn btn-purple waves-effect waves-light",
+                                           @id = "myActionLinkId"
+                                       })
+                                            <script>$("#myActionLinkId").prepend("<i class='fa fa-trash-o text-danger'></i> ");</script>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul class="pagination-list">
+
+                                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @class = "pagination-link" }), PagedListRenderOptions.PageNumbersOnly)
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

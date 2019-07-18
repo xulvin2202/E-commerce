@@ -1,0 +1,102 @@
+﻿@model Model.EF.About
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg" style="background-image: url(../../Image/2.jpg);">
+        <div class="entry-header">
+            <h3 class="entry-title">
+                Giới thiệu
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item">
+                    <i class="fa fa-home"></i>
+                    <a href="/" ref="nofollow" class="breadcrumb-label">
+                        Trang chủ
+                    </a>
+                </li>
+                <li class="breadcrumb-item is-active">
+                    <a href="/gioi-thieu" ref="nofollow" class="breadcrumb-label">
+                        Giới thiệu
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="main-body clearfix sidebar--left">
+
+
+    <main class="page page--information container">
+
+
+
+        <div class="page-content ">
+            <div id="template-about">
+                <div class="container page-about">
+                    <div class="welcome-about-us">
+                        <div class="content-about-us row">
+                            <div class="image-about-us col-md-6 col-sm-12"><img class="__mce_add_custom__" title="img-about.png" src="../../image/about.jpg" alt="img-about.png" width="570" height="402" /></div>
+                            <div class="content-about col-md-6 col-sm-12">
+                                <div class="title-about-us">
+                                    <h2>Xin chào</h2>
+                                </div>
+                                <div class="des-about-us">
+                                    <p>Bạn cần mua đồ đẹp ?
+                                        <br />
+                                    Bạn cần đồ rẻ ?</p>
+                                    <p><h2>Hãy đến với E-Light</h2></p>
+                                    <p>Địa chỉ văn phòng: 475A Điện Biên Phủ, phường 26, quận Bình Thạnh, thành phố Hồ Chí Minh</p>
+                                    <p>E-Light nhận đặt hàng trực tuyến và giao hàng tận nơi, chưa hỗ trợ mua và nhận hàng trực tiếp tại văn phòng hoặc trung tâm xử lý đơn hàng</p>
+                                    <p>Nguyễn Xuân Vinh</p>
+                                </div>
+                                <a href="/lien-he">Liên lạc với chúng tôi</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wpb_wrapper">&nbsp;</div>
+                </div>               
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // <![CDATA[
+            $(document).ready(function () {
+                $('.page--information').magnificPopup({
+                    delegate: '.popup-gallery',
+                    type: 'image',
+                    tLoading: 'Loading image #%curr%...',
+                    mainClass: 'mfp-img-mobile',
+                    gallery: {
+                        enabled: true,
+                        navigateByImgClick: true,
+                        preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+                    },
+                    image: {
+                        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                        titleSrc: function (item) {
+                            return item.el.attr('title');
+                        }
+                    }
+                });
+            });
+// ]]></script>
+    </main>
+
+
+
+</div>
+

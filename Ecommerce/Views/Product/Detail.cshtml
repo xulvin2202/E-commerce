@@ -1,0 +1,1545 @@
+﻿@model Model.EF.Product
+
+@{
+    
+    ViewBag.Title = "Chi tiết sản ph";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.Category)ViewBag.Category;
+    var Listcategory = (List<Model.EF.Category>)ViewBag.ListCategory;
+    var brand = (List<Model.EF.Brand>)ViewBag.ListBrand;
+    var relatedproducts = (List<Model.EF.Product>)ViewBag.RelatedProducts;
+}
+<div class="container">
+    <div class="sb-breadcrumbs breadcrumb-bg ">
+        <div class="entry-header">
+            <h3 class="entry-title">
+                
+            </h3>
+            <ul class="breadcrumb ">
+                <li class="breadcrumb-item ">
+                    <i class="fa fa-home"></i>
+                    <a href="/" class="breadcrumb-label">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item ">
+                    <a href="/san-pham/@category.MetaTitle-@category.ID" class="breadcrumb-label">
+                        @category.Name
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item is-active">
+                    <a href="/chi-tiet/@Model.MetaTitle-@Model.ID" class="breadcrumb-label">
+                        @Model.Name
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>*@
+
+<div class="main-body clearfix sidebar--left">
+
+
+    <div class="container">
+        <div class="row page">
+            <aside class="col-xl-3 col-lg-3 page-sidebar sidebar-offcanvas" id="faceted-search-container">
+                <nav>
+                    <span id="close-sidebar" class=" fa fa-times"></span>
+
+               
+                   
+                    <div class="module  sidebar--categories">
+                        <h5 class="block-title"> Danh Mục</h5>
+                        <div class="block-content clearfix">
+
+                            <ul class="navList">
+                                @foreach (var item in Listcategory)
+                                {
+                                <li class="navList-item">
+                                    <a class="navList-action has-subMenu" href="/san-pham/@item.MetaTitle-@item.ID"> @item.Name </a>
+                                
+                                </li>
+                                }
+                            </ul>
+
+                        </div>
+                    </div>
+                    
+
+
+                    
+
+
+
+                </nav>
+            </aside>
+            <main class="col-xl-9 col-lg-9 page-content" id="product-listing-container">
+                <div itemscope itemtype="http://schema.org/Product">
+                    <div class="sidebar-overlay"></div>
+                    <a href="javascript:void(0)" class="open-sidebar d-md-block d-lg-none"><i class="fa fa-bars"></i> Sidebar </a>
+
+
+                    <div class="productView">
+
+                        <div class="productView--top">
+                            <section class="productView-images" data-image-gallery>
+                                <figure class="productView-image"
+                                        data-image-gallery-main
+                                        data-zoom-image="../../cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/1580x1580/products/93/397/10__85920.1542788457a885.jpg?c=2&amp;imbypass=on">
+                                    <a class="productView-image-main " href="#">
+                                        <img class="productView-image--default lazyload"
+                                             data-sizes="auto"
+                                             src="@Model.Image"
+                                             data-src="@Model.Image"
+                                             alt="1 L Le Parfait Jar" title="@Model.Name" data-main-image>
+                                    </a>
+
+                                </figure>
+                               
+                                <script type="text/javascript">
+<!--
+                                    $(document).ready(function () {
+                                        $('.image-popup-sizechart').magnificPopup({
+                                            type: 'image',
+                                            closeOnContentClick: true,
+                                            mainClass: 'mfp-img-mobile',
+                                            image: {
+                                                verticalFit: true
+                                            }
+                                        });
+
+                                        $('#btn-productViewzoom').magnificPopup({
+                                            items: [
+                                                { src: "https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/1580x1580/products/93/397/10__85920.1542788457.jpg?c=2" },
+                                                { src: "https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/1580x1580/products/93/398/16__18551.1542788458.jpg?c=2" },
+                                                { src: "https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/1580x1580/products/93/399/21__42717.1542788458.jpg?c=2" },
+                                            ],
+                                            gallery: { enabled: true, preload: [0, 2] },
+                                            type: 'image',
+                                            mainClass: 'mfp-fade',
+                                            callbacks: {
+                                                open: function () {
+                                                    var activeIndex = parseInt($('ul.productView-thumbnails .is-active').data('image-gallery-item'));
+                                                    var magnificPopup = $.magnificPopup.instance;
+                                                    magnificPopup.goTo(activeIndex);
+                                                }
+                                            }
+                                        });
+                                    });
+//--></script>
+                            </section>
+
+                            <section class="productView-details">
+                                <div class="productView-product">
+
+                                    <h1 class="productView-title" itemprop="name">@Model.Name</h1>
+
+                                    <div class="productView-rating rating--small" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <meta itemprop="ratingValue" content="5">
+                                        <meta itemprop="ratingCount" content="1">
+                                        <meta itemprop="reviewCount" content="1">
+                                        <span class="icon icon--ratingFull">
+                                            <svg>
+                                                <use xlink:href="#icon-star" />
+                                            </svg>
+                                        </span>
+                                        <span class="icon icon--ratingFull">
+                                            <svg>
+                                                <use xlink:href="#icon-star" />
+                                            </svg>
+                                        </span>
+                                        <span class="icon icon--ratingFull">
+                                            <svg>
+                                                <use xlink:href="#icon-star" />
+                                            </svg>
+                                        </span>
+                                        <span class="icon icon--ratingFull">
+                                            <svg>
+                                                <use xlink:href="#icon-star" />
+                                            </svg>
+                                        </span>
+                                        <span class="icon icon--ratingFull">
+                                            <svg>
+                                                <use xlink:href="#icon-star" />
+                                            </svg>
+                                        </span>
+                                        <!-- snippet location product_rating -->
+                                        @*<span class="productView-reviewLink">
+                                            <a href="index.html#product-reviews">
+                                                (1 review)
+                                            </a>
+                                        </span>*@
+                                        <span class="productView-reviewLink">
+                                            <a href="/lien-he"
+                                               data-reveal-id="modal-review-form">
+                                                Bình luận
+                                            </a>
+                                        </span>
+                                        <div id="modal-review-form" class="modal" data-reveal>
+
+
+
+
+                                            <div class="modal-header">
+                                                <h2 class="modal-header-title">Write a Review</h2>
+                                                <a href="#" class="modal-close" aria-label="Close" role="button">
+                                                    <span aria-hidden="true">&#215;</span>
+                                                </a>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="writeReview-productDetails">
+                                                    <div class="writeReview-productImage-container">
+                                                        <img class="lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/500x500/products/93/397/10__85920.1542788457.jpg?c=2&amp;imbypass=on">
+                                                    </div>
+                                                    <h6 class="product-brand">OFS</h6>
+                                                    <h5 class="product-title">1 L Le Parfait Jar</h5>
+                                                </div>
+                                                <form class="form writeReview-form" action="https://sb-clickboom.mybigcommerce.com/postreview.php" method="post">
+                                                    <fieldset class="form-fieldset">
+                                                        <div class="form-field">
+                                                            <label class="form-label" for="rating-rate">
+                                                                Rating
+                                                                <small>Required</small>
+                                                            </label>
+                                                            <!-- Stars -->
+                                                            <!-- TODO: Review Stars need to be componentised, both for display and input -->
+                                                            <select id="rating-rate" class="form-select" name="revrating">
+                                                                <option value="">Select Rating</option>
+                                                                <option value="1">1 star (worst)</option>
+                                                                <option value="2">2 stars</option>
+                                                                <option value="3">3 stars (average)</option>
+                                                                <option value="4">4 stars</option>
+                                                                <option value="5">5 stars (best)</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- Name -->
+                                                        <div class="form-field" id="" data-validation="">
+                                                            <label class="form-label" for="_input">
+                                                                Name
+
+                                                            </label>
+                                                            <input type="text" id="_input" data-label="Name" name="revfromname" class="form-input" aria-required="">
+                                                        </div>
+
+                                                        <!-- Email -->
+                                                        <div class="form-field" id="" data-validation="">
+                                                            <label class="form-label" for="_input">
+                                                                Email
+                                                                <small>Required</small>
+                                                            </label>
+                                                            <input type="text" id="_input" data-label="Email" name="email" class="form-input" aria-required="false">
+                                                        </div>
+
+                                                        <!-- Review Subject -->
+                                                        <div class="form-field" id="" data-validation="">
+                                                            <label class="form-label" for="_input">
+                                                                Review Subject
+                                                                <small>Required</small>
+                                                            </label>
+                                                            <input type="text" id="_input" data-label="Review Subject" name="revtitle" class="form-input" aria-required="true">
+                                                        </div>
+
+                                                        <!-- Comments -->
+                                                        <div class="form-field" id="" data-validation="">
+                                                            <label class="form-label" for="_input">
+                                                                Comments
+                                                                <small>Required</small>
+                                                            </label>
+                                                            <textarea name="revtext" id="_input" data-label="Comments" rows="" aria-required="true" class="form-input"></textarea>
+                                                        </div>
+
+
+
+                                                        <div class="form-field">
+                                                            <input type="submit" class="button button--primary"
+                                                                   value="Submit Review">
+                                                        </div>
+                                                        <input type="hidden" name="product_id" value="93">
+                                                        <input type="hidden" name="action" value="post_review">
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="productView-price">
+
+                                        <div class="price-section price-section--withoutTax " itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+                                            <meta itemprop="availability" itemtype="http://schema.org/ItemAvailability"
+                                                  content="http://schema.org/InStock">
+                                            <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/Condition">
+                                            <div itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
+                                                <meta itemprop="price" content="9.85">
+                                                <meta itemprop="priceCurrency" content="AUD">
+                                                <meta itemprop="valueAddedTaxIncluded" content="false">
+                                            </div>
+                                            @if (Model.PromotionPrice != null)
+                                            {
+                                            <span data-product-price-without-tax class="price price--withoutTax"> @String.Format("{0:0,0}", Model.PromotionPrice)</span>
+                                                <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", Model.Price)</span>
+                                            }
+                                            else
+                                            {
+                                                <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:0,0}", Model.Price)</span>
+                                            }
+                                            <!--Was:-->
+
+                                        </div>
+
+                                        @*<div class="price-section price-section--saving price">
+                                                <span class="price">(You save</span>
+                                                <span data-product-price-saved class="price">
+
+                                                </span>
+                                                <span class="price">)</span>
+                                            </div>*@
+                                    </div>
+
+
+
+
+
+
+                                    <div class="productView-info">
+
+                                        <dl class="productView-info-dl">
+                                            <dt class="productView-info-name">Brand</dt>
+                                            @if (Model.Status == true)
+                                            {
+                                                <dd class="productView-info-value" data-product-brand><a href="#" itemprop="url"><span itemprop="name">Còn hàng</span></a></dd>
+                                            }
+                                            else
+                                            {
+                                                <dd class="productView-info-value" data-product-brand><a href="#" itemprop="url"><span itemprop="name">Hết hàng</span></a></dd>
+                                            }
+                                            @*<dt class="productView-info-name">SKU:</dt>
+                                            <dd class="productView-info-value" data-product-sku>SLLPJ</dd>*@
+
+                                        </dl>
+
+                                    </div>
+
+
+                                </div>
+                            </section>
+
+
+
+                            <section class="productView-details ">
+                                <div class="productView-options">
+                                    <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/cart.php" enctype="multipart/form-data"
+                                          data-cart-item-add>
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="product_id" value="93" />
+                                        <div data-product-option-change style="display:none;">
+                                            <div class="form-field" data-product-attribute="swatch">
+                                                <label class="form-label form-label--alternate form-label--inlineSmall">
+                                                    Color:
+                                                    <span data-option-value></span>
+
+                                                    <small>Required</small>
+                                                </label>
+
+                                                <input class="form-radio" type="radio" name="attribute[111]" value="7" id="attribute_7" required>
+                                                <label class="form-option form-option-swatch" for="attribute_7" data-product-attribute-value="7">
+                                                    <span class='form-option-variant form-option-variant--color' title="Silver" style="background-color: #cccccc"></span>
+                                                </label>
+                                                <input class="form-radio" type="radio" name="attribute[111]" value="8" id="attribute_8" required>
+                                                <label class="form-option form-option-swatch" for="attribute_8" data-product-attribute-value="8">
+                                                    <span class='form-option-variant form-option-variant--color' title="Black" style="background-color: #000000"></span>
+                                                </label>
+                                                <input class="form-radio" type="radio" name="attribute[111]" value="10" id="attribute_10" required>
+                                                <label class="form-option form-option-swatch" for="attribute_10" data-product-attribute-value="10">
+                                                    <span class='form-option-variant form-option-variant--color' title="Blue" style="background-color: #123c91"></span>
+                                                </label>
+                                                <input class="form-radio" type="radio" name="attribute[111]" value="13" id="attribute_13" required>
+                                                <label class="form-option form-option-swatch" for="attribute_13" data-product-attribute-value="13">
+                                                    <span class='form-option-variant form-option-variant--color' title="Orange" style="background-color: #e35e20"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-field" data-product-attribute="set-rectangle">
+                                                <label class="form-label form-label--alternate form-label--inlineSmall">
+                                                    Size:
+                                                    <span data-option-value></span>
+                                                    <small>Required</small>
+                                                </label>
+                                                <input class="form-radio"
+                                                       type="radio"
+                                                       id="attribute_95"
+                                                       name="attribute[112]"
+                                                       value="95"
+                                                       required>
+                                                <label class="form-option" for="attribute_95" data-product-attribute-value="95">
+                                                    <span class="form-option-variant">Small</span>
+                                                </label>
+                                                <input class="form-radio"
+                                                       type="radio"
+                                                       id="attribute_96"
+                                                       name="attribute[112]"
+                                                       value="96"
+                                                       required>
+                                                <label class="form-option" for="attribute_96" data-product-attribute-value="96">
+                                                    <span class="form-option-variant">Medium</span>
+                                                </label>
+                                                <input class="form-radio"
+                                                       type="radio"
+                                                       id="attribute_97"
+                                                       name="attribute[112]"
+                                                       value="97"
+                                                       required>
+                                                <label class="form-option" for="attribute_97" data-product-attribute-value="97">
+                                                    <span class="form-option-variant">Large</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-field form-field--stock u-hiddenVisually">
+                                            <label class="form-label form-label--alternate">
+                                                Current Stock:
+                                                <span data-product-stock></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-field form-field--increments">
+                                            <label class="form-label form-label--alternate"
+                                                   for="qty[]">Quantity:</label>
+
+                                            <div class="form-increment" data-quantity-change>
+
+                                                <input class="form-input form-input--incrementTotal"
+                                                       id="qty[]"
+                                                       name="qty[]"
+                                                       type="tel"
+                                                       value="1"
+                                                       data-quantity-min="0"
+                                                       data-quantity-max="0"
+                                                       min="1"
+                                                       pattern="[0-9]*"
+                                                       aria-live="polite">
+
+                                                <button class="button button--icon" data-action="inc">
+                                                    <span class="is-srOnly">Increase Quantity:</span>
+                                                    <i class="icon" aria-hidden="true">
+                                                        <svg>
+                                                            <use xlink:href="#icon-keyboard-arrow-up" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                                <button class="button button--icon" data-action="dec">
+                                                    <span class="is-srOnly">Decrease Quantity:</span>
+                                                    <i class="icon" aria-hidden="true">
+                                                        <svg>
+                                                            <use xlink:href="#icon-keyboard-arrow-down" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="alertBox productAttributes-message" style="display:none">
+                                            <div class="alertBox-column alertBox-icon">
+                                                <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+                                            </div>
+                                            <p class="alertBox-column alertBox-message"></p>
+                                        </div>
+                                        <div class="form-action">
+                                            @if (Model.Status == true)
+                                            {
+                                                <a href="/them-gio-hang?productId=@Model.ID&quantity=1" id="form-action-addToCart" data-wait-message="Adding to cart…" class="button button--primary button--addtocart">Thêm vào giỏ hàng</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="#" id="form-action-addToCart" data-wait-message="Adding to cart…" class="button button--primary button--addtocart">Hết hàng</a>
+
+                                            }
+                                        </div>
+
+                                        <!-- snippet location product_addtocart -->
+                                    </form>
+                                    @*<form action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=93" class="form form-wishlist form-action" data-wishlist-add method="post">
+                                        <a aria-controls="wishlist-dropdown" aria-expanded="false" class="button dropdown-menu-button" data-dropdown="wishlist-dropdown">
+                                            <span>Thêm vào danh sách yêu thích</span>
+                                            <i aria-hidden="true" class="icon">
+                                                <svg>
+                                                    <use xlink:href="#icon-chevron-down" />
+                                                </svg>
+                                            </i>
+                                        </a>
+                                        <ul aria-hidden="true" class="dropdown-menu" data-dropdown-content id="wishlist-dropdown" tabindex="-1">
+
+                                            <li>
+                                                <input class="button" type="submit" value="Add to My Wish List">
+                                            </li>
+                                            <li>
+                                                <a data-wishlist class="button" href="../logind735.html?action=addwishlist&amp;product_id=93">Create New Wish List</a>
+                                            </li>
+                                        </ul>
+                                    </form>*@
+                                </div>
+
+                                <!-- snippet location product_details -->
+                            </section>
+
+                            <section class="productView-details productView-details--bottom">
+                                <div class="wrap-content"><div class="addthis_inline_share_toolbox"></div></div>
+                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                <script type="text/javascript" src="../../s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529be2200cc72db5"></script>
+
+
+                            </section>
+                        </div>
+
+                        <article class="productView-description horizontal-tabs" itemprop="description">
+
+                            <ul class="tabs " data-tab>
+                                <li class="tab is-active">
+                                    <a class="tab-title" href="#tab-description">Mô tả</a>
+                                </li>
+
+                                <li class="tab">
+                                    <a class="tab-title" href="#tab-review"> Chi tiết</a>
+                                </li>
+                            </ul>
+
+                            <div class="tabs-contents ">
+                                <div class="tab-content is-active" id="tab-description">
+                                    <p>@Html.Raw(Model.Detail)</p>
+                                    <!-- snippet location product_description -->
+                                </div>
+
+
+
+
+                                <div class="tab-content" id="tab-review">
+
+                                    <section class="toggle productReviews" id="product-reviews" data-product-reviews>
+                                        <h4 class="toggle-title">
+                                         
+                                            <a class="toggleLink is-open" data-collapsible href="#productReviews-content">
+                                                <span class="toggleLink-text toggleLink-text--on">
+                                                   Hiển thị
+                                                </span>
+                                                <span class="toggleLink-text toggleLink-text--off">
+                                                    Ẩn
+                                                </span>
+                                            </a>
+                                        </h4>
+                                        <div class="toggle-content is-open" id="productReviews-content" aria-hidden="false">
+                                            <ul class="productReviews-list" id="productReviews-list">
+                                                <li class="productReview">
+                                                    <article itemprop="review" itemscope itemtype="http://schema.org/Review">
+                                                        <header>
+                                                           
+                                                          
+                                                        </header>
+                                                        <p itemprop="reviewBody" class="productReview-body">@Html.Raw(Model.Detail)</p>
+                                                    </article>
+                                                </li>
+                                            </ul>
+                                            <div class="pagination">
+                                                <ul class="pagination-list"></ul>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <!-- snippet location reviews -->
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    @*<div id="previewModal" class="modal modal--large" data-reveal>
+                        <a href="#" class="modal-close" aria-label="Close" role="button">
+                            <span aria-hidden="true">&#215;</span>
+                        </a>
+                        <div class="modal-content"></div>
+                        <div class="loadingOverlay"></div>
+                    </div>*@
+
+                    <div class="productView-related ">
+                        <ul class="tabs nav-tabs" data-tab role="tablist">
+                            <li class="tab is-active" role="presentational">
+                                <a class="tab-title" href="#tab-related" role="tab" tabindex="0" aria-selected="true" controls="tab-related">Sản phẩm cùng loại</a>
+                            </li>
+                          
+                        </ul>
+
+                        <div class="tabs-contents">
+                            <div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent is-active" id="tab-related">
+
+                                <section class="productCarousel products-list"
+                                         data-slick='{
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+		"responsive": [
+		            {
+		                "breakpoint": 1200,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+					{
+		                "breakpoint": 991,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+		            {
+		                "breakpoint": 400,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 2
+		                }
+		            },
+		            {
+		                "breakpoint": 0,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow":1
+		                }
+		            }
+		        ]
+
+    }'>
+
+
+                                    @foreach (var item in relatedproducts)
+                                    {
+                                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                        <div class="productCarousel-slide product-layout product-grid">
+
+
+                                            <article class="product-item-container ">
+                                                <div class="left-block ">
+
+                                                    @*<div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                        <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/98/388/5__34411.1542788343.jpg?c=2">
+                                                            <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/98/388/5__34411.1542788343.jpg?c=2" alt="Laundry Detergent" title="Laundry Detergent">
+                                                        </div>
+                                                        <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/98/389/7__21277.1542788343.jpg?c=2">
+                                                            <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/98/389/7__21277.1542788343.jpg?c=2" alt="Laundry Detergent" title="Laundry Detergent">
+                                                        </div>
+                                                        <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/98/390/6__47274.1542788343.jpg?c=2">
+                                                            <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/98/390/6__47274.1542788343.jpg?c=2" alt="Laundry Detergent" title="Laundry Detergent">
+                                                        </div>
+                                                    </div>*@
+
+                                                    <a href="@url" class="product-item-photo">
+                                                        <img class="img-responsive lazyload" data-sizes="auto" src="@item.Image" alt="" title="">
+                                                    </a>
+
+                                                    @*<a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="98" title="Quick view"> <i class="fa fa-search"></i></a>*@
+
+
+
+                                                </div>
+
+                                                <div class="right-block" data-card-body="98">
+                                                    <h4 class="card-title">
+                                                        <a href="@url">@item.Name</a>
+
+                                                    </h4>
+                                                    <p class="card-text" data-test-info-type="brandName">@item.Brand_ID</p>
+
+
+                                                    <div class="price-section price-section--withoutTax ">
+                                                        @if (item.PromotionPrice != null)
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 VND}", @item.PromotionPrice)  </span>
+                                                            <span data-product-non-sale-price-without-tax class="price price--rrp">@String.Format("{0:0,0}", item.Price)</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span data-product-price-without-tax class="price price--withoutTax">@String.Format("{0:#,0 VND}", item.Price)</span>
+                                                        }
+
+
+                                                    </div>
+
+
+                                                    <div class="ratings ">
+                                                        <div class="prod-rating" data-test-info-type="productRating">
+                                                            <span class="rating--small">
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="icon icon--ratingEmpty">
+                                                                    <svg>
+                                                                        <use xlink:href="#icon-star" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!-- snippet location product_rating -->
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="description">
+                                                        A 100% biodegradable plant based 3x concentrated laundry detergent for use in conventional and high efficiency machines. This product is leaping bunny certified and has not been tested on animals...
+                                                    </div>
+
+                                                    <div class="button-group">
+
+                                                        @*<div class="action-item wishlist">
+                                                            <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=98" data-wishlist-add>
+                                                                <input type="hidden" name="variation_id" value="">
+                                                                <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                                <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </div>*@
+
+
+                                                        <div class="action-item addToCart">
+                                                            <a href="/them-gio-hang?productId=@item.ID&quantity=1" @*data-addtocart data-product-id="98" data-wait-message="Add to Cart"*@ @*class="action-link  button--cart"*@ title="Add to Cart">Thêm vào giỏ hàng</a>
+                                                        </div>
+
+
+                                                        @*<div class="action-item compare ">
+                                                            <input class="form-check-input" type="checkbox" name="products[]" value="98" data-compare-id="98">
+                                                            <label class="form-check-label">
+                                                                <i class="fa fa-refresh"></i>
+                                                            </label>
+                                                        </div>*@
+
+                                                    </div>
+                                                </div>
+
+                                            </article>
+
+                                        </div>
+                                    }
+
+
+
+                                </section>
+                            </div>
+
+                            <div role="tabpanel" aria-hidden="true" class="tab-content has-jsContent" id="tab-similar">
+
+                                <section class="productCarousel products-list"
+                                         data-slick='{
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+		"responsive": [
+		            {
+		                "breakpoint": 1200,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+					{
+		                "breakpoint": 991,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 3
+		                }
+		            },
+		            {
+		                "breakpoint": 400,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow": 2
+		                }
+		            },
+		            {
+		                "breakpoint": 0,
+		                "settings": {
+		                    "slidesToScroll": 1,
+		                    "slidesToShow":1
+		                }
+		            }
+		        ]
+
+    }'>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/107/379/2__15559.1542788182.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/107/379/2__15559.1542788182.jpg?c=2" alt="Dustpan &amp; Brush" title="Dustpan &amp; Brush">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/107/380/10__26318.1542788182.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/107/380/10__26318.1542788182.jpg?c=2" alt="Dustpan &amp; Brush" title="Dustpan &amp; Brush">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/107/381/11__81291.1542788182.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/107/381/11__81291.1542788182.jpg?c=2" alt="Dustpan &amp; Brush" title="Dustpan &amp; Brush">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../dustpan-brush/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/107/379/2__15559.1542788182.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="107" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="107">
+                                                <h4 class="card-title">
+                                                    <a href="../dustpan-brush/index.html">Dustpan &amp; Brush</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $49.16</span>
+
+
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+                                                    A seemingly simple dustpan with a few features to make life easier. The arch and length of the dustpan eases cleanup, the wood turned handle provides firm grip and the rubber liner along the edge of...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=107" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cart6dc0.html?action=add&amp;product_id=107" data-addtocart data-product-id="107" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="107" data-compare-id="107">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/111/376/1__77013.1542788128.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/111/376/1__77013.1542788128.jpg?c=2" alt="Smith Journal 13" title="Smith Journal 13">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/111/377/17__23111.1542788128.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/111/377/17__23111.1542788128.jpg?c=2" alt="Smith Journal 13" title="Smith Journal 13">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/111/378/18__41371.1542788128.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/111/378/18__41371.1542788128.jpg?c=2" alt="Smith Journal 13" title="Smith Journal 13">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../smith-journal-13/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/111/376/1__77013.1542788128.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="111" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="111">
+                                                <h4 class="card-title">
+                                                    <a href="../smith-journal-13/index.html">Smith Journal 13</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $35.17</span>
+
+
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+                                                    Volume 13 of Smith Journal is crammed with more than its fair share of sharp minds. Top of the list would have to be Solomon Shereshevsky, who remembered every single thing he&rsquo;d ever come...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=111" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cart715a.html?action=add&amp;product_id=111" data-addtocart data-product-id="111" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="111" data-compare-id="111">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+                                                <div class="sale-flag-discount">
+                                                    <span class="sale-text">-20%</span>
+                                                </div>
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/103/385/4__17897.1542788297.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/103/385/4__17897.1542788297.jpg?c=2" alt="Canvas Laundry Cart - Small" title="Canvas Laundry Cart - Small">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/103/386/9__52557.1542788297.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/103/386/9__52557.1542788297.jpg?c=2" alt="Canvas Laundry Cart - Small" title="Canvas Laundry Cart - Small">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/103/387/14__27146.1542788298.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/103/387/14__27146.1542788298.jpg?c=2" alt="Canvas Laundry Cart - Small" title="Canvas Laundry Cart - Small">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../canvas-laundry-cart-small/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/103/385/4__17897.1542788297.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="103" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="103">
+                                                <h4 class="card-title">
+                                                    <a href="../canvas-laundry-cart-small/index.html">Canvas Laundry Cart - Small</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $281.34</span>
+
+
+                                                    <!--Was:-->
+                                                    <span data-product-non-sale-price-without-tax class="price price--rrp"> $350.27</span>
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+
+                                                    The last laundry cart you'll ever buy. This industrial non-collapsable cart is constructed with a steel framed body using heavyweight canvas capped with a soft leather rim sitting on four smooth...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=103" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cartdcc5.html?action=add&amp;product_id=103" data-addtocart data-product-id="103" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="103" data-compare-id="103">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/86/400/17__64916.1542788505.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/86/400/17__64916.1542788505.jpg?c=2" alt="Able Brewing System Care" title="Able Brewing System Care">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/86/401/18__46933.1542788505.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/86/401/18__46933.1542788505.jpg?c=2" alt="Able Brewing System Care" title="Able Brewing System Care">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/86/402/11__08674.1542788505.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/86/402/11__08674.1542788505.jpg?c=2" alt="Able Brewing System Care" title="Able Brewing System Care">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../able-brewing-system-care/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/86/400/17__64916.1542788505.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="86" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="86">
+                                                <h4 class="card-title">
+                                                    <a href="../able-brewing-system-care/index.html">Able Brewing System Care</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $316.51</span>
+
+
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+                                                    Stemming from an intense passion for the most flavourful cup of coffee, Able Brewing set out to create a brewer that was as aesthetically pleasing as it was functional. They imagined a product that...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=86" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cart71c0.html?action=add&amp;product_id=86" data-addtocart data-product-id="86" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="86" data-compare-id="86">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/104/382/3__78541.1542788236.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/104/382/3__78541.1542788236.jpg?c=2" alt="Utility Caddy" title="Utility Caddy">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/104/384/20__70760.1542788237.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/104/384/20__70760.1542788237.jpg?c=2" alt="Utility Caddy" title="Utility Caddy">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/104/412/15__39845.1542788778.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/104/412/15__39845.1542788778.jpg?c=2" alt="Utility Caddy" title="Utility Caddy">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../utility-caddy/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/104/412/15__39845.1542788778.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="104" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="104">
+                                                <h4 class="card-title">
+                                                    <a href="../utility-caddy/index.html">Utility Caddy</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $64.64</span>
+
+
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+                                                    This powder coated steel utility caddy ensures your cleaning essentials are stowed away in one spot ready for your household chores. Brushes, cloths, liquid soaps can all easily be stashed away. Also...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=104" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cart4418.html?action=add&amp;product_id=104" data-addtocart data-product-id="104" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="104" data-compare-id="104">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+                                    <div class="productCarousel-slide product-layout product-grid">
+
+
+                                        <article class="product-item-container ">
+                                            <div class="left-block ">
+
+                                                <div class="product-card__gallery product-card__right d-none d-sm-block">
+                                                    <div class="item-img thumb-active " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/88/403/11__19589.1542788561.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/88/403/11__19589.1542788561.jpg?c=2" alt="Chemex Coffeemaker 3 Cup" title="Chemex Coffeemaker 3 Cup">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/88/404/5__78377.1542788561.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/88/404/5__78377.1542788561.jpg?c=2" alt="Chemex Coffeemaker 3 Cup" title="Chemex Coffeemaker 3 Cup">
+                                                    </div>
+                                                    <div class="item-img " data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/88/405/20__65543.1542788561.jpg?c=2">
+                                                        <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/60x60/products/88/405/20__65543.1542788561.jpg?c=2" alt="Chemex Coffeemaker 3 Cup" title="Chemex Coffeemaker 3 Cup">
+                                                    </div>
+                                                </div>
+
+                                                <a href="../chemex-coffeemaker-3-cup/index.html" class="product-item-photo">
+                                                    <img class="img-responsive lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-5jeysafj8q/stencil/d7a3b3a0-fb9a-0136-bca6-1b3c63b2f4dc/e/7d147310-fb9b-0136-a892-03abfbabe237/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-5jeysafj8q/images/stencil/400x400/products/88/403/11__19589.1542788561.jpg?c=2" alt="" title="">
+                                                </a>
+
+                                                <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="88" title="Quick view"> <i class="fa fa-search"></i></a>
+
+
+
+                                            </div>
+
+                                            <div class="right-block" data-card-body="88">
+                                                <h4 class="card-title">
+                                                    <a href="../chemex-coffeemaker-3-cup/index.html">Chemex Coffeemaker 3 Cup</a>
+
+                                                </h4>
+                                                <p class="card-text" data-test-info-type="brandName"></p>
+
+
+                                                <div class="price-section price-section--withoutTax ">
+
+                                                    <span data-product-price-without-tax class="price price--withoutTax"> $69.63</span>
+
+
+
+                                                </div>
+
+
+                                                <div class="ratings ">
+                                                    <div class="prod-rating" data-test-info-type="productRating">
+                                                        <span class="rating--small">
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <span class="icon icon--ratingEmpty">
+                                                                <svg>
+                                                                    <use xlink:href="#icon-star" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- snippet location product_rating -->
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="description">
+                                                    The Chemex Coffeemaker was created in 1939 by famed inventor Peter J. Schlumbohm.
+                                                    Applying his knowledge of filtration and extraction, Mr. Schlumbohm was able to craft the vessel that would pour the...
+                                                </div>
+
+                                                <div class="button-group">
+
+                                                    <div class="action-item wishlist">
+                                                        <form class="form" method="post" action="https://sb-clickboom.mybigcommerce.com/wishlist.php?action=add&amp;product_id=88" data-wishlist-add>
+                                                            <input type="hidden" name="variation_id" value="">
+                                                            <input class="button button--small card-figcaption-button" type="hidden" value="Add to Wish List">
+
+                                                            <button class="action-link button--wishlist" type="submit" title="Add to Wish List">
+                                                                <i class="fa fa-heart"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                    <div class="action-item addToCart">
+                                                        <a href="../cart8c7c.html?action=add&amp;product_id=88" data-addtocart data-product-id="88" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Add to Cart</a>
+                                                    </div>
+
+
+                                                    <div class="action-item compare ">
+                                                        <input class="form-check-input" type="checkbox" name="products[]" value="88" data-compare-id="88">
+                                                        <label class="form-check-label">
+                                                            <i class="fa fa-refresh"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </article>
+
+                                    </div>
+
+
+
+
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+</div>

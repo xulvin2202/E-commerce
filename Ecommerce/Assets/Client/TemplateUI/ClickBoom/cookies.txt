@@ -1,0 +1,7 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.sb-clickboom.mybigcommerce.com	TRUE	/	FALSE	1999999999	viewPosts[limit]	9
+sb-clickboom.mybigcommerce.com	TRUE	/	FALSE	1999999999	lastVisitedCategory	23
+sb-clickboom.mybigcommerce.com	TRUE	/	FALSE	1999999999	SHOP_SESSION_TOKEN	kp4u23i8sarrs6cbllg7s90989
+sb-clickboom.mybigcommerce.com	TRUE	/	FALSE	1999999999	fornax_anonymousId	d8fa61ca-a4b3-4499-92bd-357350812d42
+

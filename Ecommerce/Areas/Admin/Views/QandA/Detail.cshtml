@@ -1,0 +1,59 @@
+﻿@model Model.EF.QandA
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{Chi tiết}
+@section jsFooter{}
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <dl class="dl-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Question </label>
+                                <div class="col-sm-10">
+                                    @Model.Question
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Answer</label>
+                                <div class="col-sm-10">
+                                    @Html.Raw(Model.Answer)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput"> Title</label>
+                                <div class="col-sm-10">
+                                    @Model.MetaTitle
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Ngày đăng </label>
+                                <div class="col-sm-10">
+
+                                    @Model.CreateDate
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="simpleinput">Trạng thái </label>
+                                <div class="col-sm-10">
+
+                                    @Model.Status
+                                </div>
+                            </div>
+                        </dl>
+                        <p>
+
+                            @Html.ActionLink("Quay lại", "Index")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

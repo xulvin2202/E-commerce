@@ -1,0 +1,51 @@
+﻿@model List<Model.EF.Footer>
+
+@*@foreach (var item in Model)
+{
+    var subfooter = Model.Where(x => x.ParentID == item.ID);
+    <div class="banners info-1">
+        <div href="#" class="banner-figure">
+
+            <i class="@item.Icon"></i>
+        </div>
+
+        <div class="banner-figcaption">
+            <div class="banner-figcaption__body">
+                <h5 class="banner-figcaption__title">@item.Name</h5>
+                @if (subfooter.Count() > 0)
+                {
+                    <div>
+                        @foreach (var subsubfooter in subfooter)
+                        {
+                            <p class="banner-figcaption__text">
+                                @subsubfooter.Name
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}*@
+@foreach (var item in Model)
+{
+    var subfooter = Model.Where(x => x.ParentID == item.ID);
+    <div class="banners info-1">
+        <div class="banner-figure">
+
+            <i class="@item.Icon"></i>
+        </div>
+
+        <div class="banner-figcaption">
+            <div class="banner-figcaption__body">
+                <h5 class="banner-figcaption__title">
+                    @item.Name
+                </h5>
+                @foreach (var subsubfooter in subfooter)
+                {
+                <p class="banner-figcaption__text">@subsubfooter.Name</p>
+                }
+                </div>
+        </div>
+    </div>
+}
